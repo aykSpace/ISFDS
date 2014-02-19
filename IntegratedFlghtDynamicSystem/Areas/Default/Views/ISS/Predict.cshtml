@@ -1,0 +1,104 @@
+﻿@using System.Web.Mvc.Html
+@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.PredictTaskViewModel
+
+
+@{
+    ViewBag.Title = "Predict";
+    Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+}
+
+@section Title
+{
+    <h1>МКС <small>Исходные данные</small></h1>
+}
+@section Reference
+{
+    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li class="active"><i class="fa fa-edit"></i>Прогноз</li>
+}
+<section class="section">
+    <div class="row" id="nuNotFound">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Ошибка!</strong> @Html.ActionLink("Выберите начальные условия", "Index", new { id = Session["SpCrId"] }, new { @class = "alert-link" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            @{Html.EnableClientValidation();}
+            @{Html.EnableUnobtrusiveJavaScript();}
+            @using (Ajax.BeginForm("Predict", null, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "predictResult",
+                OnBegin = "displayLoading()",
+                OnSuccess = "removeLoading()"
+
+            }, new { @role = "form" }))
+            {
+                <fieldset id="inputPredictEements">
+                    <legend>Исходные данные для задачи прогнозирования движения КА</legend>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.IdNu)
+                        @Html.TextBoxFor(m => m.IdNu, new { @class = "form-control", @placeholder = "ID", @id = "vectorNuId" })
+                        @Html.ValidationMessageFor(m => m.IdNu, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Circle)
+                        @Html.TextBoxFor(m => m.Circle, new { @class = "form-control", @id = "circlePredict", @placeholder = "188" })
+                        @Html.RadioButton("EnableInput", "circlePredict", new { @checked = "checked" })<span>Включить поле</span>
+                        @Html.ValidationMessageFor(m => m.Circle, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateTimePredict)
+                        @Html.TextBoxFor(m => m.DateTimePredict, new { @class = "form-control", @id = "dtPredict", @placeholder = "01/08/2014 23:00:01", @disabled = "true" })
+                        @Html.RadioButton("EnableInput", "dtPredict")<span>Включить поле</span>
+                        @Html.ValidationMessageFor(m => m.DateTimePredict, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.U)
+                        @Html.TextBoxFor(m => m.U, new { @class = "form-control", @id = "uPredict", @placeholder = "45", @disabled = "true" })
+                        @Html.RadioButton("EnableInput", "uPredict")<span>Включить поле</span>
+                        @Html.ValidationMessageFor(m => m.U, null, new { @class = "error" })
+                    </div>
+                    <hr />
+                </fieldset>
+                    <details id="diagramChoise">
+                        <summary>Выбор необходимых графиков</summary>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GrafICircle)
+                            @Html.CheckBoxFor(m => m.GrafICircle)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GrafUt)
+                            @Html.CheckBoxFor(m => m.GrafUt)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Graf, new { @disabled = "disabled" })
+                            @Html.CheckBoxFor(m => m.Graf, new { @disabled = "disabled" })
+                        </div>
+                    </details>
+                <div class="form-group">
+                    <button class="btn btn-default" aria-hidden="true" type="reset" id="clearFormButton">Очистить</button>
+                    <button class="btn btn-primary" id="predictSubmit" type="submit">Посчитать </button>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div id="predictResult"></div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/predictScript")
+
+}

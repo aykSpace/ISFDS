@@ -1,0 +1,19 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; @User.Identity.Name<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Manage", "Account")"><i class="fa fa-user"></i>Профиль</a></li>
+        <li><a href="#"><i class="fa fa-envelope"></i>Inbox <span class="badge">7</span></a></li>
+        <li><a href="@Url.Action("Manage", "Account")"><i class="fa fa-gear"></i>Настройки</a></li>
+        <li class="divider"></li>
+        <li><a href="@Url.Action("LogOff", "Account")"><i class="fa fa-power-off"></i>Выйти</a></li>
+    </ul>
+}
+else
+{
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i>&nbsp; <span style="text-decoration: underline;">Вход/регистрация</span><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="@Url.Action("Register", "Account")"><i class="fa fa-plus"></i>&nbsp; Регистрация</a></li>
+        <li><a href="#" id="loginLink"><i class="fa fa-unlock"></i>&nbsp; Выполнить вход</a></li>
+    </ul>
+}

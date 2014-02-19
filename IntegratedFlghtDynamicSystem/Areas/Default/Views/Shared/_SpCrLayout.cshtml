@@ -1,0 +1,150 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/mapbigic.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/redmond/jquery-ui-1.10.4.custom.min.css")" rel="stylesheet" type="text/css" media="all" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax")
+    @Styles.Render("~/Content/spcr-oper")
+    @Styles.Render("~/Content/grid")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="navbar-header navbar-left">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        <img src="@Url.Content("~/Images/logo.png")" /></a>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                    <ul class="nav navbar-nav side-nav">
+                        <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>Первичная баллистика<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Обработка ИТНП от НКУ</a></li>
+                                <li><a href="#">Обработка векторов от НАП</a></li>
+                                <li><a href="#">Оценка качества ИТНП</a></li>
+                                <li><a href="#">Определение параметров движения КА</a></li>
+                                <li><a href="#">Оценка точности ОППД КА</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>Маневры<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Расчет времени старта РН</a></li>
+                                <li><a href="#">Расчет коррекций орбиты</a></li>
+                                <li><a href="#">Расчет относительного движения</a></li>
+                                <li><a href="#">Расчет долгосрочного плана маневров</a></li>
+                                <li><a href="#">Расчет маневров уклонения</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>Спуски<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Расчет баллистического спуска</a></li>
+                                <li><a href="#">Расчет управляемого спуска</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-bars"></i>Начальные условия</a></li>
+                        <li><a href="#"><i class="fa fa-refresh"></i>Согласование НУ движения КА</a></li>
+                        <li><a href="@Url.Action("Predict")"><i class="fa fa-bar-chart-o"></i>Прогноз</a></li>
+                        <li><a href="#"><i class="fa fa-eye"></i>Расчет ЗРВ</a></li>
+                        <li><a href="#"><i class="fa fa-bolt"></i>Расчет наведения антенных систем</a></li>
+                        <li><a href="#"><i class="fa fa-sun-o"></i>Расчет освещенности</a></li>
+                        <li><a href="#"><i class="fa fa-globe"></i>Расчет трассы полета КА</a></li>
+                        <li><a href="@Url.Action("Charts")"><i class="fa fa-bar-chart-o"></i>Графики</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i>Формы</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i>Обмен</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right ul-menu top-margin ">
+                        @if (User.IsInRole("operator") || User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("Информационные средства", "Index", "Home")</li>
+                        }
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Космические аппараты<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("МКС", "Index", "ISS", new { id = "1" }, null)</li>
+                                <li>@Html.ActionLink("Ресурс-ДК", "About", "Home")</li>
+                                <li>@Html.ActionLink("Ресурс-П", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Электро-Л", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Канопус-В", "Contact", "Home")</li>
+                            </ul>
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole("researcher") || User.IsInRole("admin"))
+                            {
+                            <li>@Html.ActionLink("Проекты", "Index", "Home")</li>
+                            }
+
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">АСПОС ОКП<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Управляющая задача", "Index", "Home")</li>
+                                <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                                <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Документация", "About", "Home")</li>
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;@User.Identity.Name<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Manage", "Account")"><i class="fa fa-user"></i>Профиль</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i>Inbox <span class="badge">7</span></a></li>
+                                <li><a href="@Url.Action("Manage", "Account")"><i class="fa fa-gear"></i>Настройки</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("LogOff", "Account")"><i class="fa fa-power-off"></i>Выйти</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="context-inside row">
+            <div class="col-lg-12">
+                @RenderSection("Title")
+                <ol class="breadcrumb">
+                    @RenderSection("Reference", false)
+                </ol>
+                @RenderSection("featured", required: false)
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/grid")
+    <script src="@Url.Content("/Scripts/jquery.jqGrid.min.js")"></script>
+    @Scripts.Render("~/bundles/Layout")
+    @Scripts.Render("~/Scripts/jquerySession")
+    @RenderSection("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Единая система БНО полетами</title>
+    <link href="~/mapbigic.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/spcr-oper")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <<div class="navbar-header navbar-left">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Images/logo.png")" /></a>
+            </div>
+            <div class="container">
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                    <ul class="nav navbar-nav navbar-right ul-menu top-margin">
+                        @if (User.IsInRole("operator") || User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("Информационные средства", "Index", "Home")</li>
+                        }
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Космические аппараты<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("МКС", "Index", "ISS", new { id = "1" }, null)</li>
+                                <li>@Html.ActionLink("Ресурс-ДК", "About", "Home")</li>
+                                <li>@Html.ActionLink("Ресурс-П", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Электро-Л", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Канопус-В", "Contact", "Home")</li>
+                            </ul>
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole("researcher") || User.IsInRole("admin"))
+                            {
+                            <li>@Html.ActionLink("Проекты", "Index", "Home")</li>
+                            }
+
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">АСПОС ОКП<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Управляющая задача", "Index", "Home")</li>
+                                <li>@Html.ActionLink("О программе", "About", "Home")</li>
+                                <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Документация", "About", "Home")</li>
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                        <li class="dropdown">
+                            @Html.Partial("_LoginPartial")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="PopupWrapper"></div>
+    @RenderSection("featured", required: false)
+    @RenderBody()
+    <hr />
+    <footer>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p><b>Федеральное государственное унитарное предприятие "Центральный научно-исследовательский институт машиностроения" (ФГУП ЦНИИмаш)</b></p>
+                <p>Россия, 141070, Московская область, г. Королев, ул.Пионерская, д.4 </p>
+                <p>&copy; 2000-2014 ФГУП ЦНИИмаш</p>
+            </div>
+            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                <p><b>Контактная информация</b></p>
+                <p>
+                    т.<span data-tel="telephone">(495)513-59-51</span><br />
+                    ф.<span data-tel="telephone">(495)512-21-00</span>
+                </p>
+                <p>e-mail: corp@tsniimash.ru</p>
+            </div>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modern-business")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

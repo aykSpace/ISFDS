@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image: url('../../../../Images/iss.gif')"></div>
+            <div class="carousel-caption">
+                <h1>@Html.ActionLink("МКС", "Index", "ISS", new { id = 1 }, null)</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('../../../../Images/resurs_p.gif')"></div>
+            <div class="carousel-caption">
+                <h1>@Html.ActionLink("Ресурс-П", "Index", "Home")</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('../../../../Images/resursdk1.gif');"></div>
+            <div class="carousel-caption">
+                <<h1>@Html.ActionLink("Ресурс-ДК1", "Index", "Home")</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('../../../../Images/ElectroL_Auto5.gif');"></div>
+            <div class="carousel-caption">
+                <h1>@Html.ActionLink("Электро-Л", "Index", "Home")</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('../../../../Images/kanopus_3b.gif');"></div>
+            <div class="carousel-caption">
+                <h1>@Html.ActionLink("Канопус-В", "Index", "Home")</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-user"></i>&nbsp;Оператору</h3>
+                <p>Доступна функция отправки форм зарегистрированным абонентам в центрах управления полетами каждого космического аппарата. 
+                    Для просмотра отправленной и полученной информации пользуйтесь @Html.ActionLink("Информационными средствами службы БНО", "Index").
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-rocket"></i>&nbsp;Исследователю</h3>
+                <p>Управление ткущими задачами доступно в разделе @Html.ActionLink("Проект", "Index") главного меню. </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-cogs"></i>&nbsp;Администратору</h3>
+                <p>Управление пользователями, настройками системы, необработынными ошибками и служебными даными должен осуществаляться <strong>только</strong>
+                    из специального раздела!
+                </p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.section -->

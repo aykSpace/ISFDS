@@ -1,0 +1,103 @@
+﻿
+@using IntegratedFlghtDynamicSystem.Models.Grid;
+
+@{
+    ViewBag.Title = "МКС";
+    Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+
+    int pageSize = 20;
+    if (Session["NuGridSettings"] != null)
+    {
+        var grid = new GridSettings((string)Session["NuGridSettings"]);
+        pageSize = grid.PageSize;
+    }
+
+    string startDate = (Session["StartDate"] == null
+        ? string.Empty
+        : ((DateTime)Session["StartDate"]).ToShortDateString());
+    string endDate = (Session["EndDate"] == null
+        ? string.Empty
+        : ((DateTime)Session["EndDate"]).ToShortDateString());
+}
+
+<section class="gridContainer">
+    <table class="gridNavigation">
+        <tr>
+            <td style="text-align: right; margin-top: 0">
+                @using (Ajax.BeginForm("Search", "ISS",
+                    new AjaxOptions
+                    {
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "jqGrid",
+                        OnSuccess = "showGrid()"
+                    }))
+                {
+                    <table>
+                        <tr>
+                            <td>
+                                <label>@Resources.Resource.NuIndexFrom</label>
+                                <input type="text" id="from" name="from" data-datepicker="true" value="@startDate" />
+                            </td>
+                            <td>
+                                <label>@Resources.Resource.NuIndexTo</label>
+                                <input type="text" id="to" name="to" data-datepicker="true" value="@endDate" />
+                            </td>
+                            <td style="text-align: right; margin-top: 0;">
+                                <button type="submit" name="_search" class="btn-default">@Resources.Resource.NuApplyFilter &nbsp; <i class="fa fa-search"></i></button>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </td>
+            <td>
+                <button class="btn btn-primary" id="orbElementsCalc" type="submit" disabled="disabled">Посчитать элементы орбиты <i class="fa fa-chevron-down"></i> </button>
+            </td>
+        </tr>
+    </table>
+    <div id="jqGrid">
+        @Html.Partial("_NuGrid")
+    </div>
+    <script type="text/javascript">
+        var paramFromView = {
+            DeleteAllCaption: '@Resources.Resource.NuDeleteAllCaption',
+            ClearGridUrl: '@Url.Content("~/ISS/ClearGridData")',
+            DeleteAllConfirmationMessage: '@Resources.Resource.NuDeleteAllDataConfirmation',
+            Url: '@Url.Content("~/ISS/GetData")',
+            Width: '100%',
+            Height: 600,
+            Caption: '@Resources.Resource.NuIndexTitle',
+            ID_NU: '@Resources.Resource.NuIndexID_NU',
+            N_NU: '@Resources.Resource.NuIndexN_NU',
+            Modification: '@Resources.Resource.NuIndexModification',
+            Circle: '@Resources.Resource.NuIndexCircle',
+            X: '@Resources.Resource.NuIndexX',
+            Y: '@Resources.Resource.NuIndexY',
+            Z: '@Resources.Resource.NuIndexZ',
+            DateTime: '@Resources.Resource.NuIndexDateTime',
+            Selected: '@Resources.Resource.NuIndexSelect',
+            PageSize: @pageSize
+            }
+        
+    </script>
+</section>
+<section class="section">
+    <div class="row">
+        <div class=" gridNavigation col-sm-11" id="orbElementsCalcContainer">
+        </div>
+    </div>
+</section>
+@section scripts
+{
+    @Scripts.Render("~/Scripts/nuGrid")
+}
+
+@section Title
+{
+    <h1>МКС <small>Исходные данные</small></h1>
+}
+@section Reference
+{
+    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li class="active"><i class="fa fa-bars"></i>&nbsp;Начальные условия</li>
+}
