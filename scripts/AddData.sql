@@ -32,3 +32,15 @@ VALUES (0, 40000, 0, 0, 0.008234, 0, 0, 0, NULL, GETDATE(), N'МКС тест' )
 INSERT INTO Spacecraft.SpacecraftInitialData (SpacecraftNumber, SpacecraftName, SpacecraftType, OrbitType, Launcher, DateOfLaunch,
 											  MassInerCharacteristicId, EngineID, Comments)
 VALUES (1, N'МКС', N'Пилотируемая станция', N'Низкоорбитальная', N'Протон', '1998-20-11 09:40:00', 2, 0, N'ФГБ "Заря"')
+
+
+
+INSERT INTO dbo.NU (N_NU, SpacecraftInitialData_ID, Modification, X, Y,Z, VX, VY, VZ, t, Vitok, Sbal, DateNU, Comment)
+VALUES (110,1,1, 341.554678, -44444.99966, 4.9965456, 0.999523456, -1.4995678329,  0.00054, 70500, 1816, 0.04158185, '2011/10/05', N'Тестовые НУ') 
+SELECT * FROM NU
+
+INSERT INTO dbo.NU (N_NU, SpacecraftInitialData_ID, Modification, X, Y,Z, VX, VY, VZ, t, Vitok, Sbal, DateNU, Comment)
+VALUES (220,1,5, -714.159212, 6753.86879, 248.3338637, -4.21146536, -0.67453418, 6.00246598, 31620, 3287, 0.0487, '2014/18/02 08:47:00', N'НУ МКС') 
+
+INSERT INTO dbo.NU (N_NU, SpacecraftInitialData_ID, Modification, X, Y,Z, VX, VY, VZ, t, Vitok, Sbal, DateNU, Comment)
+VALUES (220,2,5, -714.159212, 6753.86879, 248.3338637, -4.21146536, -0.67453418, 6.00246598, 31620, 3287, 0.0487, '2014/18/02 08:47:00', N'Пристыкованного корабля') 

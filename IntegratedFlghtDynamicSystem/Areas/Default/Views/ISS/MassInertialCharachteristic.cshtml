@@ -1,0 +1,56 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
+
+<div class="col-lg-offset-1 col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
+        </div>
+        <div class="panel-body">
+            <div class="table">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-bullseye"></i>Поле </th>
+                            <th><i class="fa fa-edit"></i>Варианты действий</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Mass):</strong> &nbsp; @Model.Mass</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Sbal):</strong> &nbsp; @Model.Sbal</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.XT):</strong> &nbsp; @Model.XT</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.YT):</strong> &nbsp; @Model.YT</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.ZT):</strong> &nbsp; @Model.ZT</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.DateOfID):</strong> &nbsp; @Model.DateOfID</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Liter):</strong> &nbsp; @Model.Liter</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Comment):</strong> &nbsp; @Model.Comment</td>
+                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

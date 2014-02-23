@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 using IntegratedFlghtDynamicSystem.Global;
+using IntegratedFlghtDynamicSystem.Mappers;
 using IntegratedFlghtDynamicSystem.Models.DataTools;
 using IntegratedFlghtDynamicSystem.Tests.Mock;
 using IntegratedFlghtDynamicSystem.Tests.Tools;
@@ -27,6 +28,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
             InitConfig(kernel);
             InitRepository(kernel);
+            InitSpCrMapper(kernel);
             return kernel;
         }
 
@@ -40,6 +42,11 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
         {
             var fullPath = new FileInfo(Sandbox + "/Web.config").FullName;
             kernel.Bind<IConfig>().ToMethod(c => new TestConfig(fullPath));
+        }
+
+        protected virtual void InitSpCrMapper(StandardKernel kernel)
+        {
+            kernel.Bind<IMapper>().To<SpacecraftMapper>().InSingletonScope();
         }
 
     }

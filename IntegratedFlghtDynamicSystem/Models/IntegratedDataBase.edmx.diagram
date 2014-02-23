@@ -7,10 +7,10 @@
       <Diagram DiagramId="7e5d182a813644528f2b002d2eb1276d" Name="Диаграмма1">
         <EntityTypeShape EntityType="ISFDSModel.NU" Width="1.5" PointX="0.625" PointY="0.875" />
         <EntityTypeShape EntityType="ISFDSModel.Engine" Width="1.5" PointX="3.625" PointY="2.375" />
-        <EntityTypeShape EntityType="ISFDSModel.MassInertialCharacteristic" Width="1.5" PointX="6.625" PointY="3.875" />
-        <EntityTypeShape EntityType="ISFDSModel.SpacecraftInitialData" Width="1.5" PointX="9.625" PointY="5.375" />
+        <EntityTypeShape EntityType="ISFDSModel.SpacecraftInitialData" Width="1.5" PointX="10.375" PointY="2.5" />
         <AssociationConnector Association="ISFDSModel.FK_NU_SpacecraftInitialData" />
         <AssociationConnector Association="ISFDSModel.FK_SpacecraftInitialData_Engine" />
+        <EntityTypeShape EntityType="ISFDSModel.MassInertialCharacteristic" Width="1.5" PointX="6.5" PointY="2.25" />
         <AssociationConnector Association="ISFDSModel.FK_SpacecraftInitialData_MassInertialCharacteristic" />
       </Diagram>
     </edmx:Diagrams>

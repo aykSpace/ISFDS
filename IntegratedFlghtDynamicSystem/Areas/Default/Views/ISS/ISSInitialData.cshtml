@@ -1,0 +1,69 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel
+
+@{
+    ViewBag.Title = "ISSInitialData";
+    Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+}
+
+@section Title
+{
+    <h1>МКС <small>Исходные данные</small></h1>
+}
+
+@section Reference
+{
+    <li class="active"><i class="fa fa-dashboard"></i>&nbsp;Главная</li>
+}
+
+<section>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10" id="spcr-init-data">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-info"></i>&nbsp;Информация о КА</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.SpacecraftNumber): &nbsp;</strong> @Model.SpacecraftNumber
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.InternationalNumber): &nbsp;</strong> @Model.InternationalNumber
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.SpacecraftType): &nbsp;</strong> @Model.SpacecraftType
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.OrbitType): &nbsp;</strong> @Model.OrbitType
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.Launcher): &nbsp;</strong> @Model.Launcher
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.DateOfLaunch): &nbsp;</strong> @Model.DateOfLaunch
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.MassInerCharacteristicId): &nbsp;</strong>
+                            <a href="@Url.Action("MassInertialCharachteristic", new {idCharacteristic = @Model.MassInerCharacteristicId})">@Model.MassInerCharacteristicId</a>
+                        </div>
+                        <div class="list-group-item">
+                            <strong>@Html.DisplayNameFor(m => m.Comments): &nbsp;</strong> @Model.Comments
+                        </div>
+                        <div class="text-right">
+                            <a href="@Url.Action("MassInertialCharachteristic", new {idCharacteristic = @Model.MassInerCharacteristicId})">Доступные МИХи <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mic-container">
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/spCrInitialData")
+
+}

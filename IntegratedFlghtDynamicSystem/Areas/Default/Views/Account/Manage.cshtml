@@ -3,12 +3,12 @@
     ViewBag.Title = "Управление учетной записью";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
 
 <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+        </hgroup>
         <p class="message-success">@ViewBag.StatusMessage</p>
         <p>Вы вошли как <strong>@User.Identity.Name</strong>.</p>
 

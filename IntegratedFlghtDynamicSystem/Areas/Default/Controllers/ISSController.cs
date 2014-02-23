@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using BalPredictCLR;
@@ -30,9 +29,9 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         //
         // GET: /Default/ISS/
         [HttpGet]
-        public ActionResult Index(uint id)
+        public ActionResult Index()
         {
-            Session["SpCrId"] = id;
+            //Session["SpCrId"] = id;
             //_fromIndex = true;
             return View();
         }
@@ -67,7 +66,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 
             if (Session["SpCrId"] != null)
             {
-                var spCrIntiDataID  = (uint)Session["SpCrId"];
+                var spCrIntiDataID  = (int)Session["SpCrId"];
                 _fromIndex = false; // Must be set on false here!
                 //
                 // Load the data from the database for the current grid settings.
@@ -194,8 +193,21 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         public ActionResult ISSInitialData(int id)
         {
             Session["SpCrId"] = id;
-            return View();
+            _fromIndex = true;
+            var spaceCraftInitData = UnitOfWork.SpacecraftInfoRepository.GetById(id);
+            var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof (SpacecraftInitialData),
+                typeof (SpacecraftViewModel));
+            return View(spCrViewModel);
         }
+
+
+        public PartialViewResult MassInertialCharachteristic(int idCharacteristic)
+        {
+            var mic = UnitOfWork.MicRepository.GetById(idCharacteristic);
+            var micVm = MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
+                typeof (MassInertialCharactViewModel));
+            return PartialView(micVm);
+        } 
 
         public ActionResult Test()
         {

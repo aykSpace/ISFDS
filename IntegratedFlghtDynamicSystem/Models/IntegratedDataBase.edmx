@@ -62,13 +62,13 @@
           </Key>
           <Property Name="ID_MIC" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_Aero" Type="int" Nullable="false" />
-          <Property Name="Mass" Type="real" Nullable="false" />
-          <Property Name="MassOfCommonBay" Type="real" />
-          <Property Name="MassOfDeorbitSpCr" Type="real" />
-          <Property Name="Sbal" Type="real" />
-          <Property Name="XT" Type="decimal" Precision="14" Scale="8" />
-          <Property Name="YT" Type="decimal" Precision="14" Scale="8" />
-          <Property Name="ZT" Type="decimal" Precision="14" Scale="8" />
+          <Property Name="Mass" Type="float" Nullable="false" />
+          <Property Name="MassOfCommonBay" Type="float" />
+          <Property Name="MassOfDeorbitSpCr" Type="float" />
+          <Property Name="Sbal" Type="float" />
+          <Property Name="XT" Type="float" />
+          <Property Name="YT" Type="float" />
+          <Property Name="ZT" Type="float" />
           <Property Name="Liter" Type="nchar" MaxLength="10" />
           <Property Name="DateOfID" Type="date" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="150" />
@@ -135,7 +135,6 @@
         <EntityContainer Name="ISFDSEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="NUs" EntityType="ISFDSModel.NU" />
           <EntitySet Name="Engines" EntityType="ISFDSModel.Engine" />
-          <EntitySet Name="MassInertialCharacteristics" EntityType="ISFDSModel.MassInertialCharacteristic" />
           <EntitySet Name="SpacecraftInitialDatas" EntityType="ISFDSModel.SpacecraftInitialData" />
           <AssociationSet Name="FK_NU_SpacecraftInitialData" Association="ISFDSModel.FK_NU_SpacecraftInitialData">
             <End Role="SpacecraftInitialData" EntitySet="SpacecraftInitialDatas" />
@@ -145,6 +144,7 @@
             <End Role="Engine" EntitySet="Engines" />
             <End Role="SpacecraftInitialData" EntitySet="SpacecraftInitialDatas" />
           </AssociationSet>
+          <EntitySet Name="MassInertialCharacteristics" EntityType="ISFDSModel.MassInertialCharacteristic" />
           <AssociationSet Name="FK_SpacecraftInitialData_MassInertialCharacteristic" Association="ISFDSModel.FK_SpacecraftInitialData_MassInertialCharacteristic">
             <End Role="MassInertialCharacteristic" EntitySet="MassInertialCharacteristics" />
             <End Role="SpacecraftInitialData" EntitySet="SpacecraftInitialDatas" />
@@ -184,24 +184,6 @@
           <Property Type="String" Name="TypeOfEngine" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Comment" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SpacecraftInitialDatas" Relationship="ISFDSModel.FK_SpacecraftInitialData_Engine" FromRole="Engine" ToRole="SpacecraftInitialData" />
-        </EntityType>
-        <EntityType Name="MassInertialCharacteristic">
-          <Key>
-            <PropertyRef Name="ID_MIC" />
-          </Key>
-          <Property Type="Int32" Name="ID_MIC" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ID_Aero" Nullable="false" />
-          <Property Type="Single" Name="Mass" Nullable="false" />
-          <Property Type="Single" Name="MassOfCommonBay" />
-          <Property Type="Single" Name="MassOfDeorbitSpCr" />
-          <Property Type="Single" Name="Sbal" />
-          <Property Type="Decimal" Name="XT" Precision="14" Scale="8" />
-          <Property Type="Decimal" Name="YT" Precision="14" Scale="8" />
-          <Property Type="Decimal" Name="ZT" Precision="14" Scale="8" />
-          <Property Type="String" Name="Liter" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Type="DateTime" Name="DateOfID" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Comment" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SpacecraftInitialDatas" Relationship="ISFDSModel.FK_SpacecraftInitialData_MassInertialCharacteristic" FromRole="MassInertialCharacteristic" ToRole="SpacecraftInitialData" />
         </EntityType>
         <EntityType Name="SpacecraftInitialData">
           <Key>
@@ -249,6 +231,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MassInertialCharacteristic">
+          <Key>
+            <PropertyRef Name="ID_MIC" />
+          </Key>
+          <Property Type="Int32" Name="ID_MIC" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ID_Aero" Nullable="false" />
+          <Property Type="Double" Name="Mass" Nullable="false" />
+          <Property Type="Double" Name="MassOfCommonBay" />
+          <Property Type="Double" Name="MassOfDeorbitSpCr" />
+          <Property Type="Double" Name="Sbal" />
+          <Property Type="Double" Name="XT" />
+          <Property Type="Double" Name="YT" />
+          <Property Type="Double" Name="ZT" />
+          <Property Type="String" Name="Liter" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="DateTime" Name="DateOfID" Nullable="false" Precision="0" />
+          <Property Type="String" Name="Comment" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SpacecraftInitialDatas" Relationship="ISFDSModel.FK_SpacecraftInitialData_MassInertialCharacteristic" FromRole="MassInertialCharacteristic" ToRole="SpacecraftInitialData" />
+        </EntityType>
         <Association Name="FK_SpacecraftInitialData_MassInertialCharacteristic">
           <End Type="ISFDSModel.MassInertialCharacteristic" Role="MassInertialCharacteristic" Multiplicity="1" />
           <End Type="ISFDSModel.SpacecraftInitialData" Role="SpacecraftInitialData" Multiplicity="*" />
@@ -302,24 +302,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MassInertialCharacteristics">
-            <EntityTypeMapping TypeName="ISFDSModel.MassInertialCharacteristic">
-              <MappingFragment StoreEntitySet="MassInertialCharacteristic">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="DateOfID" ColumnName="DateOfID" />
-                <ScalarProperty Name="Liter" ColumnName="Liter" />
-                <ScalarProperty Name="ZT" ColumnName="ZT" />
-                <ScalarProperty Name="YT" ColumnName="YT" />
-                <ScalarProperty Name="XT" ColumnName="XT" />
-                <ScalarProperty Name="Sbal" ColumnName="Sbal" />
-                <ScalarProperty Name="MassOfDeorbitSpCr" ColumnName="MassOfDeorbitSpCr" />
-                <ScalarProperty Name="MassOfCommonBay" ColumnName="MassOfCommonBay" />
-                <ScalarProperty Name="Mass" ColumnName="Mass" />
-                <ScalarProperty Name="ID_Aero" ColumnName="ID_Aero" />
-                <ScalarProperty Name="ID_MIC" ColumnName="ID_MIC" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SpacecraftInitialDatas">
             <EntityTypeMapping TypeName="ISFDSModel.SpacecraftInitialData">
               <MappingFragment StoreEntitySet="SpacecraftInitialData">
@@ -337,6 +319,24 @@
                 <ScalarProperty Name="InternationalNumber" ColumnName="InternationalNumber" />
                 <ScalarProperty Name="SpacecraftNumber" ColumnName="SpacecraftNumber" />
                 <ScalarProperty Name="SpacecraftInitDataId" ColumnName="SpacecraftInitDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassInertialCharacteristics">
+            <EntityTypeMapping TypeName="ISFDSModel.MassInertialCharacteristic">
+              <MappingFragment StoreEntitySet="MassInertialCharacteristic">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateOfID" ColumnName="DateOfID" />
+                <ScalarProperty Name="Liter" ColumnName="Liter" />
+                <ScalarProperty Name="ZT" ColumnName="ZT" />
+                <ScalarProperty Name="YT" ColumnName="YT" />
+                <ScalarProperty Name="XT" ColumnName="XT" />
+                <ScalarProperty Name="Sbal" ColumnName="Sbal" />
+                <ScalarProperty Name="MassOfDeorbitSpCr" ColumnName="MassOfDeorbitSpCr" />
+                <ScalarProperty Name="MassOfCommonBay" ColumnName="MassOfCommonBay" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="ID_Aero" ColumnName="ID_Aero" />
+                <ScalarProperty Name="ID_MIC" ColumnName="ID_MIC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

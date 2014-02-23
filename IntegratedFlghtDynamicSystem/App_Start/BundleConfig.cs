@@ -48,7 +48,7 @@ namespace IntegratedFlghtDynamicSystem
                 "~/Scripts/globalize.js",
                 "~/Scripts/dx.chartjs.js",
                 "~/Scripts/chartsScript.js"));
-
+            bundles.Add(new ScriptBundle("~/Scripts/spCrInitialData").Include("~/Scripts/spCrInitialData.js"));
             //bundles.Add(new StyleBundle("~/bundles/fonts").Include("~/Content/font-awesome.min.css"));
 
             /* bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

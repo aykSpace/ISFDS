@@ -14,6 +14,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
             : base(mockBehavior)
         {
             GenerateNUs();
+            GenerateSpCrItitialData();
         }
     }
 }

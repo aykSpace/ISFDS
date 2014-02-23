@@ -18,6 +18,17 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
             get;
         }
 
+        GenericRepository<MassInertialCharacteristic> MicRepository
+        {
+            get;
+        }
+
+        GenericRepository<Engine> EngineRepository
+        {
+            get;
+        } 
+
+
         void Save();
 
     }

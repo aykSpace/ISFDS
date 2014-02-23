@@ -45,19 +45,6 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
             Assert.That(result.Result.ViewBag.Error, Is.StringStarting("Операция прогноза положения КА завершилась с ошибкой:"));
         }
 
-        [Test]
-        public void Index_GetModeId_IdNotNull()
-        {
-
-            //act
-            var result = _controller.Index(1);
-
-            //assert
-            Assert.IsInstanceOf<SpacecraftViewModel>(((ViewResult)result).Model);
-            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).Id;
-
-            Assert.That(resultId, Is.Not.Null.And.EqualTo(1));
-        }
 
 
         [Test]
@@ -139,7 +126,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
 
             //assert
             Assert.IsInstanceOf<SpacecraftViewModel>(((ViewResult)result).Model);
-            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).Id;
+            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).SpacecraftNumber;
 
             Assert.That(resultId, Is.Not.Null.And.EqualTo(1));
         }

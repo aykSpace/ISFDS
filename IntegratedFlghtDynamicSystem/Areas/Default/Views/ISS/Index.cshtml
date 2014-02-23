@@ -20,6 +20,17 @@
         : ((DateTime)Session["EndDate"]).ToShortDateString());
 }
 
+@section Title
+{
+    <h1>МКС <small>начальные условия</small></h1>
+}
+
+@section Reference
+{
+    <li><a href="@Url.Action("ISSInitialData", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li class="active"><i class="fa fa-bars"></i>&nbsp;Начальные условия</li>
+}
+
 <section class="gridContainer">
     <table class="gridNavigation">
         <tr>
@@ -90,14 +101,4 @@
 @section scripts
 {
     @Scripts.Render("~/Scripts/nuGrid")
-}
-
-@section Title
-{
-    <h1>МКС <small>Исходные данные</small></h1>
-}
-@section Reference
-{
-    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
-    <li class="active"><i class="fa fa-bars"></i>&nbsp;Начальные условия</li>
 }

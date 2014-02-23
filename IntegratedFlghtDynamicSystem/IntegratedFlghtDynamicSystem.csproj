@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="BalPredictCLR, Version=1.0.5151.19104, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CSharpBalPredict\BalPredictCLR\Debug\BalPredictCLR.dll</HintPath>
@@ -223,6 +226,7 @@
     <Compile Include="Areas\Default\Models\IFactory.cs" />
     <Compile Include="Areas\Default\Models\IOperation.cs" />
     <Compile Include="Areas\Default\Models\OperationPredict.cs" />
+    <Compile Include="Areas\Default\ViewModels\MassInertialCharactViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\SpacecraftViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\PredictTaskViewModel.cs" />
@@ -235,6 +239,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global\IConfig.cs" />
+    <Compile Include="Mappers\MassInerCharactMapper.cs" />
+    <Compile Include="Mappers\SpacecraftMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DataTools\UnitOfWork.cs" />
     <Compile Include="Models\DataTools\GenericRepository.cs" />
@@ -411,6 +418,8 @@
     <Content Include="Areas\Default\Views\ISS\_PredictResult.cshtml" />
     <Content Include="Areas\Default\Views\ISS\Charts.cshtml" />
     <Content Include="Areas\Default\Views\ISS\CalculateOrbitElements.cshtml" />
+    <Content Include="Areas\Default\Views\ISS\ISSInitialData.cshtml" />
+    <Content Include="Areas\Default\Views\ISS\MassInertialCharachteristic.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />
@@ -447,6 +456,7 @@
     <Content Include="Scripts\NuGrid.js" />
     <Content Include="Scripts\predictScript.js" />
     <Content Include="Scripts\raphael-2.1.0.min.js" />
+    <Content Include="Scripts\spCrInitialData.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
