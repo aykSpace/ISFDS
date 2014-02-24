@@ -17,6 +17,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         public MassInertialCharacteristic()
         {
             this.SpacecraftInitialDatas = new HashSet<SpacecraftInitialData>();
+            this.SpaceсraftCommonData = new HashSet<SpaceсraftCommonData>();
         }
     
         public int ID_MIC { get; set; }
@@ -33,5 +34,6 @@ namespace IntegratedFlghtDynamicSystem.Models
         public string Comment { get; set; }
     
         public virtual ICollection<SpacecraftInitialData> SpacecraftInitialDatas { get; set; }
+        public virtual ICollection<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
     }
 }

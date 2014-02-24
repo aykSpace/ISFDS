@@ -204,8 +204,15 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         public PartialViewResult MassInertialCharachteristic(int idCharacteristic)
         {
             var mic = UnitOfWork.MicRepository.GetById(idCharacteristic);
-            var micVm = MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
+            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
                 typeof (MassInertialCharactViewModel));
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            var listOfCommonDatas = UnitOfWork.SpacecraftCommonDataRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
+            foreach (var spaceсraftCommonData in listOfCommonDatas)
+            {
+                micVm.AvalibleMicId.Add(spaceсraftCommonData.MIC_Id);
+            }
+            
             return PartialView(micVm);
         } 
 

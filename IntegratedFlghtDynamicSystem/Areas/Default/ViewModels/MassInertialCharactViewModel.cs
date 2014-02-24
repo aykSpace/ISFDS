@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Microsoft.Data.Edm.Expressions;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 {
@@ -43,5 +46,29 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         [Required]
         [Display(Name = "Комментарий")]
         public string Comment { get; set; }
+
+        private List<int> _avalibleMicId = new List<int>();
+
+        public List<int> AvalibleMicId
+        {
+            get { return _avalibleMicId; }
+               
+        }
+
+
+
+        public IEnumerable<SelectListItem> AvalibleMicIdSelectListItems
+        {
+            get
+            {
+                return AvalibleMicId.Select((t, i) => new SelectListItem
+                {
+                    Value = i.ToString(CultureInfo.InvariantCulture),
+                    Text = t.ToString(CultureInfo.InvariantCulture),
+                    Selected = t == i
+                });
+            }
+        } 
+
     }
 }

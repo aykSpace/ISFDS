@@ -10,45 +10,57 @@
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
-                            <th><i class="fa fa-bullseye"></i>Поле </th>
-                            <th><i class="fa fa-edit"></i>Варианты действий</th>
+                            <th><i class="fa fa-list"></i>Поле </th>
+                            <th><i class="fa fa-edit"></i>Значение</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.Mass):</strong> &nbsp; @Model.Mass</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.Mass)</strong></td>
+                            <td>@Model.Mass</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.Sbal):</strong> &nbsp; @Model.Sbal</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.Sbal)</strong></td>
+                            <td>@Model.Sbal</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.XT):</strong> &nbsp; @Model.XT</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.XT)</strong></td>
+                            <td>@Model.XT</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.YT):</strong> &nbsp; @Model.YT</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.YT)</strong></td>
+                            <td>@Model.YT</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.ZT):</strong> &nbsp; @Model.ZT</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.ZT)</strong></td>
+                            <td>@Model.ZT</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.DateOfID):</strong> &nbsp; @Model.DateOfID</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.DateOfID)</strong></td>
+                            <td>@Model.DateOfID</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.Liter):</strong> &nbsp; @Model.Liter</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.Liter)</strong></td>
+                            <td>@Model.Liter</td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(m => m.Comment):</strong> &nbsp; @Model.Comment</td>
-                            <td>@Html.ActionLink("Edit","Test", new {id = Model.ID_MIC})</td>
+                            <td><strong>@Html.DisplayNameFor(m => m.Comment)</strong></td>
+                            <td>@Model.Comment</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="text-center form-inline">
+                    <div class="form-group">
+                        <label>Доступные МИХи: </label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new {@id = "test", @class = "form-control"})
+                        
+                    </div>
+                    <button class="btn btn-primary" id="test1">Добавить</button>
+                    <button class="btn btn-warning">Изменить</button>
+                    <button class="btn btn-danger">Удалить</button>
+                </div>
             </div>
         </div>
     </div>

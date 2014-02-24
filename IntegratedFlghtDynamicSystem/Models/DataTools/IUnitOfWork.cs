@@ -26,8 +26,12 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         GenericRepository<Engine> EngineRepository
         {
             get;
-        } 
+        }
 
+        GenericRepository<SpaceсraftCommonData> SpacecraftCommonDataRepository
+        {
+            get;
+        }
 
         void Save();
 

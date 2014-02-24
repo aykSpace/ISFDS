@@ -278,6 +278,9 @@
     <Compile Include="Models\SpacecraftInitialData.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SpaceсraftCommonData.cs">
+      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
