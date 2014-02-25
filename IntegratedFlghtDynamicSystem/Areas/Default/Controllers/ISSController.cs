@@ -200,13 +200,13 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             return View(spCrViewModel);
         }
 
+        //
+        // GET: /Default/ISS/MassInertialCharachteristic
 
-        public PartialViewResult MassInertialCharachteristic(int idCharacteristic)
+        public PartialViewResult MassInertialCharachteristic()
         {
-            var mic = UnitOfWork.MicRepository.GetById(idCharacteristic);
-            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
-                typeof (MassInertialCharactViewModel));
             int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            var micVm = new MassInertialCharactViewModel();
             var listOfCommonDatas = UnitOfWork.SpacecraftCommonDataRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
             foreach (var spaceсraftCommonData in listOfCommonDatas)
             {
@@ -214,7 +214,16 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             }
             
             return PartialView(micVm);
-        } 
+        }
+
+        public ActionResult GetMic(int id)
+        {
+            var mic = UnitOfWork.MicRepository.GetById(id);
+            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
+                typeof (MassInertialCharactViewModel));
+            return Json(micVm, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult Test()
         {

@@ -1,6 +1,6 @@
 ﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
 
-<div class="col-lg-offset-1 col-lg-4">
+<div class="col-lg-offset-1 col-lg-5">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
@@ -14,50 +14,54 @@
                             <th><i class="fa fa-edit"></i>Значение</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="massInerData">
+                    </tbody>
+                    <script type="text/javascript" src="@Url.Content("~/Scripts/jQuery.tmpl.min.js")"></script>
+                    <script id="massInerTmp" type="text/x-jquery-tmpl">
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.Mass)</strong></td>
-                            <td>@Model.Mass</td>
+                            <td>${Mass}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.Sbal)</strong></td>
-                            <td>@Model.Sbal</td>
+                            <td>${Sbal}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.XT)</strong></td>
-                            <td>@Model.XT</td>
+                            <td>${XT}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.YT)</strong></td>
-                            <td>@Model.YT</td>
+                            <td>${YT}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.ZT)</strong></td>
-                            <td>@Model.ZT</td>
+                            <td>${ZT}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.DateOfID)</strong></td>
-                            <td>@Model.DateOfID</td>
+                            <td>${DateOfID}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.Liter)</strong></td>
-                            <td>@Model.Liter</td>
+                            <td>${Liter}</td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(m => m.Comment)</strong></td>
-                            <td>@Model.Comment</td>
+                            <td>${Comment}</td>
                         </tr>
-                    </tbody>
+                    </script>
                 </table>
                 <div class="text-center form-inline">
                     <div class="form-group">
-                        <label>Доступные МИХи: </label>
+                        <label>МИХ:</label>
                     </div>
                     <div class="form-group">
-                        @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new {@id = "test", @class = "form-control"})
-                        
+                        @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new { @id = "aval-mic", @class = "form-control" })
+
                     </div>
-                    <button class="btn btn-primary" id="test1">Добавить</button>
+                    <button class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Выбрать</button>
+                    <button class="btn btn-primary">Добавить</button>
                     <button class="btn btn-warning">Изменить</button>
                     <button class="btn btn-danger">Удалить</button>
                 </div>

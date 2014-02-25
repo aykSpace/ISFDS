@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.MassInerCharacteristicId)</strong></td>
-                                    <td><a href="@Url.Action("MassInertialCharachteristic", new { idCharacteristic = @Model.MassInerCharacteristicId })">@Model.MassInerCharacteristicId</a></td> 
+                                    <td><a href="@Url.Action("MassInertialCharachteristic", new {id = @Model.MassInerCharacteristicId})">@Model.MassInerCharacteristicId</a></td> 
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.Comments)</strong></td>
@@ -67,7 +67,7 @@
                             </tbody>
                         </table>
                         <div class="text-right">
-                            <a href="@Url.Action("MassInertialCharachteristic", new { idCharacteristic = @Model.MassInerCharacteristicId })">Управлние МИХами 
+                            <a href="@Url.Action("MassInertialCharachteristic", new {id = @Model.MassInerCharacteristicId})">Управлние МИХами 
                                 <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
