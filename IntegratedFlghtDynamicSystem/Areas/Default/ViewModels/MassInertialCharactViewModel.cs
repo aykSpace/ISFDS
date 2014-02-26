@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.Data.Edm.Expressions;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 {
@@ -56,7 +54,6 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         }
 
 
-
         public IEnumerable<SelectListItem> AvalibleMicIdSelectListItems
         {
             get
@@ -65,7 +62,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
                 {
                     Value = i.ToString(CultureInfo.InvariantCulture),
                     Text = t.ToString(CultureInfo.InvariantCulture),
-                    Selected = t == i
+                    Selected = ID_MIC == t
                 });
             }
         } 

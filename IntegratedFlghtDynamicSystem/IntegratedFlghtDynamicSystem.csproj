@@ -423,6 +423,7 @@
     <Content Include="Areas\Default\Views\ISS\CalculateOrbitElements.cshtml" />
     <Content Include="Areas\Default\Views\ISS\ISSInitialData.cshtml" />
     <Content Include="Areas\Default\Views\ISS\MassInertialCharachteristic.cshtml" />
+    <Content Include="Areas\Default\Views\ISS\AddMic.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />

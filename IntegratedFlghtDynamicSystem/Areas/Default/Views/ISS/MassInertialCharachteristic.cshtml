@@ -60,11 +60,15 @@
                         @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new { @id = "aval-mic", @class = "form-control" })
 
                     </div>
-                    <button class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Выбрать</button>
-                    <button class="btn btn-primary">Добавить</button>
+                    <a href="@Url.Action("SetCurrentMic")" class="btn btn-success" id="check"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
+                    <a href="@Url.Action("AddMic")" class="btn btn-primary">Добавить</a>
                     <button class="btn btn-warning">Изменить</button>
                     <button class="btn btn-danger">Удалить</button>
                 </div>
+            </div>
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Текущий идентификатор МИХ:&nbsp;</strong> @Session["MicId"] @*@Html.ActionLink("Выберите начальные условия", "Index", new { id = Session["SpCrId"] }, new { @class = "alert-link" })*@
             </div>
         </div>
     </div>

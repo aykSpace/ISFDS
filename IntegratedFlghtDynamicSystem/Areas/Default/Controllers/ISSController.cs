@@ -66,7 +66,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 
             if (Session["SpCrId"] != null)
             {
-                var spCrIntiDataID  = (int)Session["SpCrId"];
+                var spCrIntiDataID = (int)Session["SpCrId"];
                 _fromIndex = false; // Must be set on false here!
                 //
                 // Load the data from the database for the current grid settings.
@@ -84,7 +84,6 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                 //
                 string gridSettingsString = grid.ToString(); // Used to preserve grid settings!
                 Session["NuSettings"] = gridSettingsString;
-                gridSettingsString = null;
                 var result = new
                 {
                     total = (int)Math.Ceiling((double)count / grid.PageSize),
@@ -195,8 +194,8 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             Session["SpCrId"] = id;
             _fromIndex = true;
             var spaceCraftInitData = UnitOfWork.SpacecraftInfoRepository.GetById(id);
-            var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof (SpacecraftInitialData),
-                typeof (SpacecraftViewModel));
+            var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof(SpacecraftInitialData),
+                typeof(SpacecraftViewModel));
             return View(spCrViewModel);
         }
 
@@ -207,23 +206,80 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         {
             int idSpcr = Convert.ToInt32(Session["SpCrId"]);
             var micVm = new MassInertialCharactViewModel();
+            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
+            micVm.ID_MIC = spCr.MassInerCharacteristicId;
             var listOfCommonDatas = UnitOfWork.SpacecraftCommonDataRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
             foreach (var spaceсraftCommonData in listOfCommonDatas)
             {
                 micVm.AvalibleMicId.Add(spaceсraftCommonData.MIC_Id);
             }
-            
+            Session["MicId"] = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).MassInerCharacteristicId;
+
             return PartialView(micVm);
         }
 
         public ActionResult GetMic(int id)
         {
             var mic = UnitOfWork.MicRepository.GetById(id);
-            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof (MassInertialCharacteristic),
-                typeof (MassInertialCharactViewModel));
+            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof(MassInertialCharacteristic),
+                typeof(MassInertialCharactViewModel));
             return Json(micVm, JsonRequestBehavior.AllowGet);
         }
 
+
+        public RedirectToRouteResult SetCurrentMic(int? id)
+        {
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            if (id == null)
+            {
+                return RedirectToAction("ISSInitialData", new { id = idSpcr });
+            }
+            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
+            spCr.MassInerCharacteristicId = Convert.ToInt32(id);
+            UnitOfWork.SpacecraftInfoRepository.Update(spCr);
+            UnitOfWork.Save();
+            return RedirectToAction("ISSInitialData", new { id = idSpcr });
+        }
+
+
+        [HttpGet]
+        public ActionResult AddMic()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddMic(MassInertialCharactViewModel micViewModel)
+        {
+            var dateMic = Request["DateOfID"];
+            const string format = "MM/dd/yyyy";
+            var provider = CultureInfo.InvariantCulture;
+            micViewModel.DateOfID = DateTime.ParseExact(dateMic, format, provider);
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            try
+            {
+                var mic = (MassInertialCharacteristic)MassInerCharactMapper.Map(micViewModel, typeof (MassInertialCharactViewModel),
+                    typeof (MassInertialCharacteristic));
+                UnitOfWork.MicRepository.Insert(mic);
+
+                var currentEngineId = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).EngineID;
+               
+                UnitOfWork.SpacecraftCommonDataRepository.Insert(new SpaceсraftCommonData
+                {
+                    SpacecraftInitDataId = idSpcr, 
+                    EngineId = currentEngineId,
+                    MIC_Id = mic.ID_MIC
+                });
+                UnitOfWork.Save();
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Error = exception.Message;
+                RedirectToAction("AddMic");
+            }
+            return RedirectToAction("ISSInitialData", new { id = idSpcr });
+        }
 
         public ActionResult Test()
         {

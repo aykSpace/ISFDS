@@ -11,9 +11,11 @@ function showMassInerCharacteristicGuidePanel(url) {
 function changeClasses() {
     $('#spcr-init-data').removeClass('col-lg-offset-1 col-lg-10');
     $('#spcr-init-data').addClass('col-lg-offset-1 col-lg-4');
-    
+    var $check = $('#check');
+    var checkUrl = $check.attr('href');
     $('#aval-mic').on('change', function () {
         var url = '/ISS/GetMic/' + $('#aval-mic option:selected').text();
+        $('#check').attr('href', checkUrl + '\/' + $('#aval-mic option:selected').text());
         showMassInerData(url);
     } ); 
 }
