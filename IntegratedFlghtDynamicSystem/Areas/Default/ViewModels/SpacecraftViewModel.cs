@@ -9,6 +9,10 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         public int SpacecraftNumber { get; set; }
 
         [Required]
+        [Display(Name = "Название КА")]
+        public string SpacecraftName { get; set; }
+
+        [Required]
         [Display(Name = "Международный номер КА")]
         public string InternationalNumber { get; set; }
 

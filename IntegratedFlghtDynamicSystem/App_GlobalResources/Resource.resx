@@ -174,4 +174,13 @@
   <data name="NuIndexCircle" xml:space="preserve">
     <value>Circle</value>
   </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Database exception, call administrator!</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Unexpected exception, call administrator!</value>
+  </data>
+  <data name="NullMicError" xml:space="preserve">
+    <value>No MIC with this Id!</value>
+  </data>
 </root>

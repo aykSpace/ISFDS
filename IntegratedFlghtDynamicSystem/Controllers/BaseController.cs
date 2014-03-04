@@ -27,5 +27,8 @@ namespace IntegratedFlghtDynamicSystem.Controllers
             }
         }
 
+        public static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+
     }
 }

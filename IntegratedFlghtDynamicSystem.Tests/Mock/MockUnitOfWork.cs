@@ -15,6 +15,9 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
         {
             GenerateNUs();
             GenerateSpCrItitialData();
+            GenerateSpcrComonData();
+            GenerateMicData();
+            Setup(p => p.Save()).Verifiable("fail save");
         }
     }
 }
