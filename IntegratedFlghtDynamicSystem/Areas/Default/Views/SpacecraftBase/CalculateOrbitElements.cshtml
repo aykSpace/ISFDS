@@ -1,0 +1,42 @@
+﻿@model OrbitElementsCalc.OrbitElementsCLI
+
+@{
+    double I = Model.I * 180 / 3.141519;
+}
+<div class="panel panel-default text-center">
+    <div class="panel-heading">
+        <strong>Элементы орбиты</strong>
+    </div>
+    <table class="table table-hover">
+        <tr>
+            <td>
+                <strong>I:&nbsp;</strong>@I
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Ω:&nbsp;</strong>@Model.Omega
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>ω:&nbsp;</strong>@Model.Omega1
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>A:&nbsp;</strong>@Model.A
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>U:&nbsp;</strong>@Model.U
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <strong>E:&nbsp;</strong>@Model.E
+            </td>
+        </tr>
+    </table>
+</div>

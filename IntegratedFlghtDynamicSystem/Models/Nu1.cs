@@ -16,7 +16,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         /// <param name="idSpcr">Id of spacecraft initial data</param>
         /// <returns>IQueryable NU</returns>
         public static IQueryable<NU> SearchNuByDates(IUnitOfWork unitOfWork, DateTime searchStartDate,
-            DateTime searchEndDate, uint idSpcr)
+            DateTime searchEndDate, int idSpcr)
         {
             if (searchStartDate.Date == DateTime.MinValue && searchEndDate.Date == DateTime.MinValue)
             {

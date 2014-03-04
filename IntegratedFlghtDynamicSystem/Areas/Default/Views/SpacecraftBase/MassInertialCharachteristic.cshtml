@@ -1,0 +1,76 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
+
+<div class="col-lg-offset-1 col-lg-5">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
+        </div>
+        <div class="panel-body">
+            <div class="table">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-list"></i>Поле </th>
+                            <th><i class="fa fa-edit"></i>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody id="massInerData">
+                    </tbody>
+                    <script type="text/javascript" src="@Url.Content("~/Scripts/jQuery.tmpl.min.js")"></script>
+                    <script id="massInerTmp" type="text/x-jquery-tmpl">
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Mass)</strong></td>
+                            <td>${Mass}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Sbal)</strong></td>
+                            <td>${Sbal}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.XT)</strong></td>
+                            <td>${XT}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.YT)</strong></td>
+                            <td>${YT}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.ZT)</strong></td>
+                            <td>${ZT}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.DateOfID)</strong></td>
+                            <td>${DateOfID}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Liter)</strong></td>
+                            <td>${Liter}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Comment)</strong></td>
+                            <td>${Comment}</td>
+                        </tr>
+                    </script>
+                </table>
+                <div class="text-center form-inline">
+                    <div class="form-group">
+                        <label>МИХ:</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new { @id = "aval-mic", @class = "form-control" })
+
+                    </div>
+                    <a href="@Url.Action("SetCurrentMic")" class="btn btn-success" id="check"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
+                    <a href="@Url.Action("AddMic")" class="btn btn-primary">Добавить</a>
+                    <a href="@Url.Action("EditMic", new {id = Model.ID_MIC})" class="btn btn-warning" id="edit">Изменить</a>
+                    <a href="@Url.Action("DeleteMic", new {id = Model.ID_MIC})" class="btn btn-danger" id="delete">Удалить</a>
+                </div>
+            </div>
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Текущий идентификатор МИХ:&nbsp;</strong> @Session["MicId"]
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Database exception, call administrator!.
+        /// </summary>
+        internal static string DatabaseError {
+            get {
+                return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Поиск.
         /// </summary>
         internal static string NuApplyFilter {
@@ -214,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как No MIC with this Id!.
+        /// </summary>
+        internal static string NullMicError {
+            get {
+                return ResourceManager.GetString("NullMicError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Идентификатор НУ.
         /// </summary>
         internal static string PredictTaskViewModel_IdNu_Name {
@@ -228,6 +246,15 @@ namespace Resources {
         internal static string PredictTaskViewModel_IdNu_RequiredMessage {
             get {
                 return ResourceManager.GetString("PredictTaskViewModel_IdNu_RequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, такую же, как Unexpected exception, call administrator!.
+        /// </summary>
+        internal static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
         }
     }

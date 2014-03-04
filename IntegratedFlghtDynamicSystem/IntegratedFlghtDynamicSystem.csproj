@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="BalPredictCLR, Version=1.0.5151.19104, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CSharpBalPredict\BalPredictCLR\Debug\BalPredictCLR.dll</HintPath>
@@ -52,6 +55,9 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.0.0.6\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="OrbitElementsCalc, Version=1.0.5130.17220, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -213,6 +219,7 @@
     <Compile Include="Areas\Default\Controllers\AccountController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\ISSController.cs" />
+    <Compile Include="Areas\Default\Controllers\SpacecraftBaseController.cs" />
     <Compile Include="Areas\Default\DefaultAreaRegistration.cs" />
     <Compile Include="Areas\Default\Models\Client.cs" />
     <Compile Include="Areas\Default\Models\DataForPredictDiagrams.cs" />
@@ -223,10 +230,13 @@
     <Compile Include="Areas\Default\Models\IFactory.cs" />
     <Compile Include="Areas\Default\Models\IOperation.cs" />
     <Compile Include="Areas\Default\Models\OperationPredict.cs" />
+    <Compile Include="Areas\Default\ViewModels\MainSpacecraftLayoutViewModel.cs" />
+    <Compile Include="Areas\Default\ViewModels\MassInertialCharactViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\SpacecraftViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\PredictTaskViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Extensions\ExtendedRazorViewEngine.cs" />
     <Compile Include="Filters\AcceptAjaxAttribute.cs" />
     <Compile Include="Filters\AjaxAutorizeAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -235,6 +245,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global\IConfig.cs" />
+    <Compile Include="Mappers\MassInerCharactMapper.cs" />
+    <Compile Include="Mappers\SpacecraftMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DataTools\UnitOfWork.cs" />
     <Compile Include="Models\DataTools\GenericRepository.cs" />
@@ -269,6 +282,9 @@
     </Compile>
     <Compile Include="Models\Nu1.cs" />
     <Compile Include="Models\SpacecraftInitialData.cs">
+      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpaceсraftCommonData.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -388,7 +404,7 @@
     <Content Include="Fonts\FontAwesome.otf" />
     <Content Include="Areas\Default\Views\Account\AjaxLogin.cshtml" />
     <Content Include="Areas\Default\Views\Shared\_SpCrLayout.cshtml" />
-    <Content Include="Areas\Default\Views\ISS\Index.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\SpacecraftVectorsInitialData.cshtml" />
     <EntityDeploy Include="Models\IntegratedDataBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IntegratedDataBase.Designer.cs</LastGenOutput>
@@ -406,11 +422,16 @@
       <DependentUpon>IntegratedDataBase.edmx</DependentUpon>
       <LastGenOutput>IntegratedDataBase.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Default\Views\ISS\_NuGrid.cshtml" />
-    <Content Include="Areas\Default\Views\ISS\Predict.cshtml" />
-    <Content Include="Areas\Default\Views\ISS\_PredictResult.cshtml" />
-    <Content Include="Areas\Default\Views\ISS\Charts.cshtml" />
-    <Content Include="Areas\Default\Views\ISS\CalculateOrbitElements.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\_NuGrid.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\Predict.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\_PredictResult.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\Charts.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\CalculateOrbitElements.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\Index.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\MassInertialCharachteristic.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\AddMic.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\EditMic.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\DeleteMic.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />
@@ -447,6 +468,7 @@
     <Content Include="Scripts\NuGrid.js" />
     <Content Include="Scripts\predictScript.js" />
     <Content Include="Scripts\raphael-2.1.0.min.js" />
+    <Content Include="Scripts\spCrInitialData.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -483,6 +505,7 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Default\Views\ISS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

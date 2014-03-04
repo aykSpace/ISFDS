@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using IntegratedFlghtDynamicSystem.Areas.Admin;
 using IntegratedFlghtDynamicSystem.Areas.Default;
+using IntegratedFlghtDynamicSystem.Extensions;
 
 namespace IntegratedFlghtDynamicSystem
 {
@@ -18,6 +19,13 @@ namespace IntegratedFlghtDynamicSystem
     {
         protected void Application_Start()
         {
+            ViewEngines.Engines.Clear();
+            var engine = new ExtendedRazorViewEngine();
+            engine.AddPartialViewLocationFormat("~/Areas/Default/Views/SpacecraftBase/{0}.cshtml");
+            engine.AddViewLocationFormat("~/Areas/Default/Views/SpacecraftBase/{0}.cshtml");
+
+            ViewEngines.Engines.Add(engine);
+
             var adminArea = new AdminAreaRegistration();
             var adminAreaContext = new AreaRegistrationContext(adminArea.AreaName, RouteTable.Routes);
             adminArea.RegisterArea(adminAreaContext);
@@ -25,6 +33,8 @@ namespace IntegratedFlghtDynamicSystem
             var defaultArea = new DefaultAreaRegistration();
             var defaultAreaContext = new AreaRegistrationContext(defaultArea.AreaName, RouteTable.Routes);
             defaultArea.RegisterArea(defaultAreaContext);
+
+            
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

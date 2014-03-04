@@ -26,6 +26,14 @@ namespace IntegratedFlghtDynamicSystem.Tests.Fake
             }
         }
 
+        public override string this[string str]
+        {
+            get
+            {
+                return _formParams.Get(str);
+            }
+        }
+
         public override NameValueCollection QueryString
         {
             get

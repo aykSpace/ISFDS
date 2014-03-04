@@ -141,7 +141,7 @@
     <Compile Include="Fake\FakeIdentity.cs" />
     <Compile Include="Fake\FakePrincipal.cs" />
     <Compile Include="Mock\MockUnitOfWork.cs" />
-    <Compile Include="Mock\Nus.cs" />
+    <Compile Include="Mock\MockData.cs" />
     <Compile Include="ModelTests\DataDiagramTest.cs" />
     <Compile Include="ModelTests\PredictModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

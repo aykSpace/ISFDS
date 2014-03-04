@@ -13,15 +13,33 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         private readonly ISFDSEntities _context;
         private GenericRepository<SpacecraftInitialData> _spacecraftInfoRepository;
         private GenericRepository<NU> _nuRepository;
+        private GenericRepository<MassInertialCharacteristic> _micRepository;
+        private GenericRepository<Engine> _engineRepository;
+        private GenericRepository<SpaceсraftCommonData> _spcraftCommonDataRepository; 
 
         public GenericRepository<SpacecraftInitialData> SpacecraftInfoRepository
         {
             get { return _spacecraftInfoRepository ?? (_spacecraftInfoRepository = new GenericRepository<SpacecraftInitialData>(_context)); }
         }
 
+        public GenericRepository<SpaceсraftCommonData> SpacecraftCommonDataRepository
+        {
+            get { return _spcraftCommonDataRepository ?? (_spcraftCommonDataRepository = new GenericRepository<SpaceсraftCommonData>(_context)); }
+        }
+
         public GenericRepository<NU> NuRepository
         {
             get { return _nuRepository ?? (_nuRepository = new GenericRepository<NU>(_context)); }
+        }
+
+        public GenericRepository<MassInertialCharacteristic> MicRepository
+        {
+            get { return _micRepository ?? (_micRepository = new GenericRepository<MassInertialCharacteristic>(_context)); }
+        }
+
+        public GenericRepository<Engine> EngineRepository
+        {
+            get { return _engineRepository ?? (_engineRepository = new GenericRepository<Engine>(_context)); }
         }
 
         public void Save()

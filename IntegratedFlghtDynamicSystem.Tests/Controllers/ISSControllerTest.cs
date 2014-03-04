@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.SessionState;
@@ -45,19 +47,6 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
             Assert.That(result.Result.ViewBag.Error, Is.StringStarting("Операция прогноза положения КА завершилась с ошибкой:"));
         }
 
-        [Test]
-        public void Index_GetModeId_IdNotNull()
-        {
-
-            //act
-            var result = _controller.Index(1);
-
-            //assert
-            Assert.IsInstanceOf<SpacecraftViewModel>(((ViewResult)result).Model);
-            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).Id;
-
-            Assert.That(resultId, Is.Not.Null.And.EqualTo(1));
-        }
 
 
         [Test]
@@ -131,17 +120,68 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
         }
 
         [Test]
-        public void ISSInitialData_GetModeId_IdNotNull()
+        public void ISSIndex_GetModeId_IdNotNull()
         {
 
             //act
-            var result = _controller.ISSInitialData(1);
+            var result = _controller.Index(1);
 
             //assert
             Assert.IsInstanceOf<SpacecraftViewModel>(((ViewResult)result).Model);
-            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).Id;
+            var resultId = ((SpacecraftViewModel)((ViewResult)result).Model).SpacecraftNumber;
 
             Assert.That(resultId, Is.Not.Null.And.EqualTo(1));
+        }
+
+        [Test]
+        public void MassInerCharacteristic_Get_ResutSesssionIsEqual2()
+        {
+            _controller.Session["SpCrId"] = 1;
+            _controller.MassInertialCharachteristic();
+            var result = _controller.Session["MicId"];
+            
+
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void SetCurrentMic_Execute_ResultIsRedirectToAction()
+        {
+            _controller.Session["SpCrId"] = 1;
+            var result = _controller.SetCurrentMic(2);
+            Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
+        }
+
+        [Test]
+        public void GetMic_Execute_ResulHasProp()
+        {
+            var result = (JsonResult)_controller.GetMic(2);
+            Assert.That(result.Data, Has.Property("ID_MIC"));
+        }
+
+        [Test]
+        public void AddMic_Execute_ResultIsRedirectToAction()
+        {
+            var formPar = new NameValueCollection { { "DateOfID", DateTime.Now.ToString("d", CultureInfo.InvariantCulture) } };
+            _controller.ControllerContext = new FakeControllerContext(_controller,"a.y.kutomanov@gmail.com", null, formPar, null, null, _sessionItems);
+            _controller.Session["SpCrId"] = 1;
+            var micViwModel = new MassInertialCharactViewModel
+            {
+                ID_MIC = 4,
+                Mass = 333,
+                XT = -1,
+                YT = -2,
+                ZT = -3,
+                DateOfID = DateTime.Now,
+                Liter = "w",
+                Sbal = 0.123,
+                Comment = "from test"
+            };
+            var result = _controller.AddMic(micViwModel);
+
+
+
+            Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
         }
 
         private void ResetPredictViewModelValues()

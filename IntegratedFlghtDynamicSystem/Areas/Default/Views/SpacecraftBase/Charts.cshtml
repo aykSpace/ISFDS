@@ -1,0 +1,76 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.PredictTaskViewModel
+@{
+    ViewBag.Title = "Charts";
+    Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+}
+
+@section Title
+{
+    <h1>МКС <small>Исходные данные</small></h1>
+}
+@section Reference
+{
+    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li class="active"><i class="fa fa-edit"></i>Графики</li>
+}
+@*<link href="@Url.Content("~/Content/morris.css")" rel="stylesheet">*@
+
+<section class="section">
+    <div class="row" id="nuNotFound">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Ошибка!</strong> @ViewBag.ErrorChart
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <h2>Графики последних расчетов</h2>
+        </div>
+    </div>
+    @if (Session["GrafI"] != null)
+    {
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>&nbsp;Наклонение от витка</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div id="icircle-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        Session["GrafI"] = null;
+    }
+    @if (Session["GrafU"] != null)
+    {
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>&nbsp;Большая полуось от витка</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div id="ucircle-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        Session["GrafU"] = null;
+    }
+</section>
+
+@section Scripts
+{
+    @*@Scripts.Render("~/Scripts/morris-charts")*@
+    @* <script src="@Url.Content("~/Scripts/raphael-2.1.0.min.js")"></script>*@
+    @Scripts.Render("~/Scripts/chartJs")
+}
+

@@ -17,21 +17,23 @@ namespace IntegratedFlghtDynamicSystem.Models
         public MassInertialCharacteristic()
         {
             this.SpacecraftInitialDatas = new HashSet<SpacecraftInitialData>();
+            this.SpaceсraftCommonData = new HashSet<SpaceсraftCommonData>();
         }
     
         public int ID_MIC { get; set; }
         public int ID_Aero { get; set; }
-        public float Mass { get; set; }
-        public Nullable<float> MassOfCommonBay { get; set; }
-        public Nullable<float> MassOfDeorbitSpCr { get; set; }
-        public Nullable<float> Sbal { get; set; }
-        public Nullable<decimal> XT { get; set; }
-        public Nullable<decimal> YT { get; set; }
-        public Nullable<decimal> ZT { get; set; }
+        public double Mass { get; set; }
+        public Nullable<double> MassOfCommonBay { get; set; }
+        public Nullable<double> MassOfDeorbitSpCr { get; set; }
+        public Nullable<double> Sbal { get; set; }
+        public Nullable<double> XT { get; set; }
+        public Nullable<double> YT { get; set; }
+        public Nullable<double> ZT { get; set; }
         public string Liter { get; set; }
         public System.DateTime DateOfID { get; set; }
         public string Comment { get; set; }
     
         public virtual ICollection<SpacecraftInitialData> SpacecraftInitialDatas { get; set; }
+        public virtual ICollection<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
     }
 }

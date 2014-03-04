@@ -18,6 +18,21 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
             get;
         }
 
+        GenericRepository<MassInertialCharacteristic> MicRepository
+        {
+            get;
+        }
+
+        GenericRepository<Engine> EngineRepository
+        {
+            get;
+        }
+
+        GenericRepository<SpaceсraftCommonData> SpacecraftCommonDataRepository
+        {
+            get;
+        }
+
         void Save();
 
     }

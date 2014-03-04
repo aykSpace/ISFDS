@@ -1,7 +1,8 @@
-﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 
 @{
     Layout = null;
+    var viewModel = (MainSpacecraftLayoutViewModel) ViewData["MainSpacecraftLayoutViewModel"];
 }
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                     <ul class="nav navbar-nav side-nav">
-                        <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+                        <li><a href="@Url.Action("Index",@viewModel.CotrollerName, new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i>Первичная баллистика<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -67,7 +68,7 @@
                                 <li><a href="#">Расчет управляемого спуска</a></li>
                             </ul>
                         </li>
-                        <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-bars"></i>Начальные условия</a></li>
+                        <li><a href="@Url.Action("SpacecraftVectorsInitialData",@viewModel.CotrollerName)"><i class="fa fa-bars"></i>Начальные условия</a></li>
                         <li><a href="#"><i class="fa fa-refresh"></i>Согласование НУ движения КА</a></li>
                         <li><a href="@Url.Action("Predict")"><i class="fa fa-bar-chart-o"></i>Прогноз</a></li>
                         <li><a href="#"><i class="fa fa-eye"></i>Расчет ЗРВ</a></li>

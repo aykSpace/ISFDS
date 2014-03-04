@@ -1,0 +1,109 @@
+﻿@using System.Globalization
+@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
+
+@{
+    ViewBag.Title = "AddMic";
+    Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+}
+
+@section Title
+{
+    <h1>Добавление массо-инерционных характеристик</h1>
+}
+@section Reference
+{
+    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li class="active"><i class="fa fa-edit"></i>Добавить МИХ</li>
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="alert alert-dismissable alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Вводите данные внимательно!</strong>
+            </div>
+
+            @{Html.EnableClientValidation();}
+            @{Html.EnableUnobtrusiveJavaScript();}
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Массо-иненрционные характеристики</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Mass)
+                        @Html.TextBoxFor(model => model.Mass, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Mass, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sbal)
+                        @Html.TextBoxFor(model => model.Sbal, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Sbal, null, new { @class = "error" })
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.XT)
+                        @Html.TextBoxFor(model => model.XT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.XT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.YT)
+                        @Html.TextBoxFor(model => model.YT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.YT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZT)
+                        @Html.TextBoxFor(model => model.ZT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ZT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfID)
+                        <input class="form-control" data-val="true" data-val-date="Поле Дата записи МИХ должно содержать дату."
+                             data-val-required="Требуется поле Дата записи МИХ." id="DateOfID" name="DateOfID" type="text" value="@DateTime.Now.ToString("d", CultureInfo.InvariantCulture)">
+                        @Html.ValidationMessageFor(model => model.DateOfID, null, new { @class = "error" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Liter)
+                        @Html.TextBoxFor(model => model.Liter, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Liter, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comment)
+                        @Html.TextBoxFor(model => model.Comment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Comment, null, new { @class = "error" })
+                    </div>
+
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="Добавить" />
+                        <input type="reset" class="btn btn-default" value="Очистить" />
+                        @Html.ActionLink("На главную", "Index",new { id = Session["SpCrId"] }, new {@class = "btn btn-default"})
+                    </p>
+                </fieldset>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Ошибка!</strong> @ViewBag.Error
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

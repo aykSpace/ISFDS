@@ -34,7 +34,7 @@
         },
         url: paramFromView.Url
     }).navGrid('#_nuPaper', { view: false, del: false, add: false, edit: false, search: false },
-    {width: 400},
+    { width: 400 },
     {}, // default settings for add
     {}, // delete instead that del:false we need this
     {}, // search options
@@ -52,17 +52,19 @@
 
 var id;
 function getId() {
-    $('#_nuGrid').on('click',(function(event) {
-        var selRowId = $(this).jqGrid('getGridParam', 'selrow'),
-        celValue = $(this).jqGrid('getCell', selRowId, 'ID_NU');
-         id = celValue;
+    $('#jqGrid').on('click', (function (event) {
+        var $nuGrid = $('#_nuGrid');
+        var selRowId = $nuGrid.jqGrid('getGridParam', 'selrow'),
+        celValue = $nuGrid.jqGrid('getCell', selRowId, 'ID_NU');
+        id = celValue;
         changeVal(id);
         $('#orbElementsCalc').removeProp('disabled');
+
     }));
 }
 
 function calcOrbElements() {
-    $('#orbElementsCalc').click(function(event) {
+    $('#orbElementsCalc').click(function (event) {
         event.preventDefault();
         var url = '/ISS/CalculateOrbitElements/' + id;
         var $container = $('#orbElementsCalcContainer');
@@ -75,7 +77,7 @@ function changeVal(id) {
     $.session.set('idNu', id);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     showGrid();
     getId();
     calcOrbElements();

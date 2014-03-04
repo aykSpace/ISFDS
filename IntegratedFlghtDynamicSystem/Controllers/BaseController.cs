@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using IntegratedFlghtDynamicSystem.Mappers;
 using IntegratedFlghtDynamicSystem.Models.DataTools;
 using Ninject;
 
@@ -13,11 +10,25 @@ namespace IntegratedFlghtDynamicSystem.Controllers
         [Inject]
         public IUnitOfWork UnitOfWork { get; set; }
 
-        //private UnitOfWork _unitOfWork;
-        //public UnitOfWork UnitOfWork
-        //{
-        //    get { return _unitOfWork ?? (_unitOfWork = new UnitOfWork()); }
-        //}
+        [Inject]
+        public IMapper SpaceCraftModelMapper { get; set; }
+
+        private IMapper _massInerCharactMapper;
+
+        public IMapper MassInerCharactMapper
+        {
+            get
+            {
+                return _massInerCharactMapper ?? new MassInerCharactMapper();
+            }
+            set
+            {
+                _massInerCharactMapper = value;
+            }
+        }
+
+        public static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
 
     }
 }
