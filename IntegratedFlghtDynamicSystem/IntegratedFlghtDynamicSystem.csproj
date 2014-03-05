@@ -232,10 +232,12 @@
     <Compile Include="Areas\Default\Models\OperationPredict.cs" />
     <Compile Include="Areas\Default\ViewModels\MainSpacecraftLayoutViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\MassInertialCharactViewModel.cs" />
+    <Compile Include="Areas\Default\ViewModels\NuViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\SpacecraftViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\PredictTaskViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\NuController.cs" />
     <Compile Include="Extensions\ExtendedRazorViewEngine.cs" />
     <Compile Include="Filters\AcceptAjaxAttribute.cs" />
     <Compile Include="Filters\AjaxAutorizeAttribute.cs" />
@@ -246,6 +248,7 @@
     </Compile>
     <Compile Include="Global\IConfig.cs" />
     <Compile Include="Mappers\MassInerCharactMapper.cs" />
+    <Compile Include="Mappers\NuMapper.cs" />
     <Compile Include="Mappers\SpacecraftMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\AccountModels.cs" />

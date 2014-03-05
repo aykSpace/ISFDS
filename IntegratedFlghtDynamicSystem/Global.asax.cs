@@ -19,6 +19,8 @@ namespace IntegratedFlghtDynamicSystem
     {
         protected void Application_Start()
         {
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+
             ViewEngines.Engines.Clear();
             var engine = new ExtendedRazorViewEngine();
             engine.AddPartialViewLocationFormat("~/Areas/Default/Views/SpacecraftBase/{0}.cshtml");
@@ -34,13 +36,18 @@ namespace IntegratedFlghtDynamicSystem
             var defaultAreaContext = new AreaRegistrationContext(defaultArea.AreaName, RouteTable.Routes);
             defaultArea.RegisterArea(defaultAreaContext);
 
-            
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+        }
+
+        protected void Application_Error()
+        {
+            Exception lastException = Server.GetLastError();
+             var logger = NLog.LogManager.GetCurrentClassLogger();
+            logger.Fatal(lastException);
         }
     }
 }
