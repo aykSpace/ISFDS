@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ConfigTest.cs" />
     <Compile Include="Controllers\ISSControllerTest.cs" />
+    <Compile Include="Controllers\NuApiTest.cs" />
     <Compile Include="Fake\FakeControllerContext.cs" />
     <Compile Include="Fake\FakeHttpContext.cs" />
     <Compile Include="Fake\FakeHttpRequest.cs" />

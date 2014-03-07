@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using IntegratedFlghtDynamicSystem.Filters;
 using IntegratedFlghtDynamicSystem.Models;
 using IntegratedFlghtDynamicSystem.Models.Grid;
 using OrbitElementsCalc;
+using HttpNotFoundResult = System.Web.Mvc.HttpNotFoundResult;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
@@ -33,7 +35,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         //
         // GET: /Default/SpacecraftBase/id
         /// <summary>
-        /// Главная страница с информацией о КА
+        /// Главная страница с информацией o КА
         /// </summary>
         /// <param name="id">Id SpacecraftInitialData</param>
         /// <returns></returns>
@@ -41,10 +43,14 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         {
             Session["SpCrId"] = id;
             var spaceCraftInitData = UnitOfWork.SpacecraftInfoRepository.GetById(id);
-            var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof(SpacecraftInitialData),
+            if (spaceCraftInitData != null)
+            {
+                var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof(SpacecraftInitialData),
                 typeof(SpacecraftViewModel));
-            ViewBag.Controller = "Home";
-            return View(spCrViewModel);
+                ViewBag.Controller = "Home";
+                return View(spCrViewModel);
+            }
+            return new HttpNotFoundResult("Spacecraft not found");
         }
 
         /// <summary>
@@ -173,9 +179,13 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         public ActionResult GetMic(int id)
         {
             var mic = UnitOfWork.MicRepository.GetById(id);
-            var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof(MassInertialCharacteristic),
+            if (mic != null)
+            {
+                var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof(MassInertialCharacteristic),
                 typeof(MassInertialCharactViewModel));
-            return Json(micVm, JsonRequestBehavior.AllowGet);
+                return Json(micVm, JsonRequestBehavior.AllowGet);
+            }
+            return HttpNotFound("Mass inertial characteristic not found");
         }
 
 
@@ -274,12 +284,13 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMic(MassInertialCharactViewModel micVm)
+        public ActionResult EditMic(int id, MassInertialCharactViewModel micVm)
         {
-            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            var idSpcr = Convert.ToInt32(Session["SpCrId"]);
+
             try
             {
-                if (ModelState.IsValid && micVm != null)
+                if (ModelState.IsValid && micVm.ID_MIC == id)
                 {
                     var mic = (MassInertialCharacteristic)MassInerCharactMapper.Map(micVm, typeof(MassInertialCharactViewModel),
                     typeof(MassInertialCharacteristic));
@@ -290,7 +301,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                 return View(micVm);
             }
 
-            catch (DataException exception)
+            catch (DbUpdateConcurrencyException exception)
             {
                 ViewBag.Error = Resources.Resource.DatabaseError;
                 Logger.Error(exception.Message);

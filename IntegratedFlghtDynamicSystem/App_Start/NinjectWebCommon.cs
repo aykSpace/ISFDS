@@ -1,6 +1,10 @@
+using System.Web.Http;
 using IntegratedFlghtDynamicSystem.Mappers;
 using IntegratedFlghtDynamicSystem.Models;
 using IntegratedFlghtDynamicSystem.Models.DataTools;
+using IntegratedFlghtDynamicSystem.Ninject;
+using Ninject;
+using Ninject.Web.Common;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(IntegratedFlghtDynamicSystem.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(IntegratedFlghtDynamicSystem.App_Start.NinjectWebCommon), "Stop")]
@@ -11,9 +15,6 @@ namespace IntegratedFlghtDynamicSystem.App_Start
     using System.Web;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
 
     public static class NinjectWebCommon
     {
@@ -46,6 +47,8 @@ namespace IntegratedFlghtDynamicSystem.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
 
             RegisterServices(kernel);
             return kernel;

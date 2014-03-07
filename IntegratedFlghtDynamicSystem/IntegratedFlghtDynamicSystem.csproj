@@ -290,6 +290,8 @@
     <Compile Include="Models\SpaceсraftCommonData.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ninject\NinjectResolver.cs" />
+    <Compile Include="Ninject\NinjectScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
