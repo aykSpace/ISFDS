@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<IntegratedFlghtDynamicSystem.Models.SpacecraftInitialData>
+@{
     ViewBag.Title = "Home Page";
 }
 <div id="myCarousel" class="carousel slide">
@@ -28,7 +29,7 @@
         <div class="item">
             <div class="fill" style="background-image: url(@Url.Content("~/Images/resursdk1.gif"))"></div>
             <div class="carousel-caption">
-                <<h1>@Html.ActionLink("Ресурс-ДК1", "Index", "Home")</h1>
+                <h1>@Html.ActionLink("Ресурс-ДК1", "Index", "Home")</h1>
             </div>
         </div>
         <div class="item">
@@ -55,13 +56,65 @@
 </div>
 
 <div class="section">
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-info"></i>&nbsp;<strong>Обслуживаемые КА</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Номер КА </th>
+                                        <th>Имя КА</th>
+                                        <th>Тип КА</th>
+                                        <th>Pакета-носитель</th>
+                                        <th>Дата запуска</th>
+                                        <th>Комментарии</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var spcraft in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.SpacecraftNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.SpacecraftName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.SpacecraftType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.Launcher)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.DateOfLaunch)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => spcraft.Comments)
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="section-colored">
 
     <div class="container">
 
         <div class="row">
             <div class="col-lg-4 col-md-4">
                 <h3><i class="fa fa-user"></i>&nbsp;Оператору</h3>
-                <p>Доступна функция отправки форм зарегистрированным абонентам в центрах управления полетами каждого космического аппарата. 
+                <p>
+                    Доступна функция отправки форм зарегистрированным абонентам в центрах управления полетами каждого космического аппарата. 
                     Для просмотра отправленной и полученной информации пользуйтесь @Html.ActionLink("Информационными средствами службы БНО", "Index").
                 </p>
             </div>
@@ -71,7 +124,8 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <h3><i class="fa fa-cogs"></i>&nbsp;Администратору</h3>
-                <p>Управление пользователями, настройками системы, необработынными ошибками и служебными даными должен осуществаляться <strong>только</strong>
+                <p>
+                    Управление пользователями, настройками системы, необработынными ошибками и служебными даными должен осуществаляться <strong>только</strong>
                     из специального раздела!
                 </p>
             </div>

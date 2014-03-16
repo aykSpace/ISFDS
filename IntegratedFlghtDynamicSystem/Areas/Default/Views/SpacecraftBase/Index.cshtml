@@ -1,8 +1,10 @@
-﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model SpacecraftViewModel
 
 @{
     ViewBag.Title = "ISSInitialData";
     Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
 }
 
 @section Title
@@ -15,7 +17,7 @@
     <li class="active"><i class="fa fa-dashboard"></i>&nbsp;Главная</li>
 }
 
-<section>
+<section class="section">
     <div class="row">
         <div class="col-lg-offset-1 col-lg-10" id="spcr-init-data">
             <div class="panel panel-primary">
@@ -58,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.MassInerCharacteristicId)</strong></td>
-                                    <td><a href="@Url.Action("MassInertialCharachteristic", new {id = @Model.MassInerCharacteristicId})">@Model.MassInerCharacteristicId</a></td> 
+                                    <td><a href="@Url.Action("MassInertialCharachteristic",@viewModel.CotrollerName, new {id = @Model.MassInerCharacteristicId})">@Model.MassInerCharacteristicId</a></td> 
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.Comments)</strong></td>
@@ -67,7 +69,7 @@
                             </tbody>
                         </table>
                         <div class="text-right">
-                            <a href="@Url.Action("MassInertialCharachteristic", new {id = @Model.MassInerCharacteristicId})">Управлние МИХами 
+                            <a href="@Url.Action("MassInertialCharachteristic",@viewModel.CotrollerName, new {id = @Model.MassInerCharacteristicId})">Управлние МИХами 
                                 <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

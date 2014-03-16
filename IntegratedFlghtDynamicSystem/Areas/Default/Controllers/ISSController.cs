@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using BalPredictCLR;
-using IntegratedFlghtDynamicSystem.Areas.Default.Models;
+﻿using System.Web.Mvc;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
-using IntegratedFlghtDynamicSystem.Controllers;
-using IntegratedFlghtDynamicSystem.Filters;
-using IntegratedFlghtDynamicSystem.Models;
-using IntegratedFlghtDynamicSystem.Models.Grid;
-using OrbitElementsCalc;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {

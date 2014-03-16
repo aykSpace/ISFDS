@@ -70,12 +70,12 @@
                         </li>
                         <li><a href="@Url.Action("SpacecraftVectorsInitialData",@viewModel.CotrollerName)"><i class="fa fa-bars"></i>Начальные условия</a></li>
                         <li><a href="#"><i class="fa fa-refresh"></i>Согласование НУ движения КА</a></li>
-                        <li><a href="@Url.Action("Predict")"><i class="fa fa-bar-chart-o"></i>Прогноз</a></li>
+                        <li><a href="@Url.Action("Predict", @viewModel.CotrollerName)"><i class="fa fa-bar-chart-o"></i>Прогноз</a></li>
                         <li><a href="#"><i class="fa fa-eye"></i>Расчет ЗРВ</a></li>
                         <li><a href="#"><i class="fa fa-bolt"></i>Расчет наведения антенных систем</a></li>
                         <li><a href="#"><i class="fa fa-sun-o"></i>Расчет освещенности</a></li>
                         <li><a href="#"><i class="fa fa-globe"></i>Расчет трассы полета КА</a></li>
-                        <li><a href="@Url.Action("Charts")"><i class="fa fa-bar-chart-o"></i>Графики</a></li>
+                        <li><a href="@Url.Action("Charts", @viewModel.CotrollerName)"><i class="fa fa-bar-chart-o"></i>Графики</a></li>
                         <li><a href="#"><i class="fa fa-book"></i>Формы</a></li>
                         <li><a href="#"><i class="fa fa-envelope-o"></i>Обмен</a></li>
                     </ul>

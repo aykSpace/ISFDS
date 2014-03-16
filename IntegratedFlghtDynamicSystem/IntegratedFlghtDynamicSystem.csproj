@@ -216,6 +216,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SpacecraftController.cs" />
     <Compile Include="Areas\Default\Controllers\AccountController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\ISSController.cs" />
@@ -437,6 +439,9 @@
     <Content Include="Areas\Default\Views\SpacecraftBase\AddMic.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\EditMic.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\DeleteMic.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AddSpacecraft.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />
@@ -507,9 +512,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Default\Views\ISS\" />
   </ItemGroup>
   <ItemGroup>

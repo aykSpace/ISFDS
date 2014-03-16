@@ -5,6 +5,10 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
     public class SpacecraftViewModel
     {
         [Required]
+        [Display(Name = "Идентификатор КА")]
+        public int SpacecraftInitDataId { get; set; }
+
+        [Required]
         [Display(Name = "Номер КА")]
         public int SpacecraftNumber { get; set; }
 

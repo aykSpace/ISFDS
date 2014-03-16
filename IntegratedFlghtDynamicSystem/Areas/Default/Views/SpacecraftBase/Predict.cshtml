@@ -1,10 +1,12 @@
 ﻿@using System.Web.Mvc.Html
-@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.PredictTaskViewModel
+@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model PredictTaskViewModel
 
 
 @{
     ViewBag.Title = "Predict";
     Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
 }
 
 @section Title
@@ -13,7 +15,7 @@
 }
 @section Reference
 {
-    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li><a href="@Url.Action("Index",viewModel.CotrollerName, new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
     <li class="active"><i class="fa fa-edit"></i>Прогноз</li>
 }
 <section class="section">
@@ -21,7 +23,7 @@
         <div class="col-lg-offset-1 col-lg-10">
             <div class="alert alert-dismissable alert-danger">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Ошибка!</strong> @Html.ActionLink("Выберите начальные условия", "Index", new { id = Session["SpCrId"] }, new { @class = "alert-link" })
+                <strong>Ошибка!</strong> @Html.ActionLink("Выберите начальные условия", "SpacecraftVectorsInitialData", @viewModel.CotrollerName, new { id = Session["SpCrId"] }, new { @class = "alert-link" })
             </div>
         </div>
     </div>
@@ -29,7 +31,7 @@
         <div class="col-lg-offset-1 col-lg-10">
             @{Html.EnableClientValidation();}
             @{Html.EnableUnobtrusiveJavaScript();}
-            @using (Ajax.BeginForm("Predict", null, new AjaxOptions
+            @using (Ajax.BeginForm("Predict", viewModel.CotrollerName, null, new AjaxOptions
             {
                 HttpMethod = "Post",
                 InsertionMode = InsertionMode.Replace,

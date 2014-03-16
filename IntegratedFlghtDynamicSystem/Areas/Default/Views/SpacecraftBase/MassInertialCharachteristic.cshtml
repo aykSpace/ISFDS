@@ -1,4 +1,9 @@
-﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model MassInertialCharactViewModel
+
+@{
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
+}
 
 <div class="col-lg-offset-1 col-lg-5">
     <div class="panel panel-primary">
@@ -60,10 +65,10 @@
                         @Html.DropDownList("AvalibleMic", Model.AvalibleMicIdSelectListItems, new { @id = "aval-mic", @class = "form-control" })
 
                     </div>
-                    <a href="@Url.Action("SetCurrentMic")" class="btn btn-success" id="check"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
-                    <a href="@Url.Action("AddMic")" class="btn btn-primary">Добавить</a>
-                    <a href="@Url.Action("EditMic", new {id = Model.ID_MIC})" class="btn btn-warning" id="edit">Изменить</a>
-                    <a href="@Url.Action("DeleteMic", new {id = Model.ID_MIC})" class="btn btn-danger" id="delete">Удалить</a>
+                    <a href="@Url.Action("SetCurrentMic", @viewModel.CotrollerName)" class="btn btn-success" id="check"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
+                    <a href="@Url.Action("AddMic", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
+                    <a href="@Url.Action("EditMic", @viewModel.CotrollerName, new {id = Model.ID_MIC})" class="btn btn-warning" id="edit">Изменить</a>
+                    <a href="@Url.Action("DeleteMic", @viewModel.CotrollerName, new {id = Model.ID_MIC})" class="btn btn-danger" id="delete">Удалить</a>
                 </div>
             </div>
             <div class="alert alert-dismissable alert-success">

@@ -8,9 +8,21 @@ namespace IntegratedFlghtDynamicSystem
         {
             config.Routes.MapHttpRoute("DefaultApi",
                 "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
+                new { id = RouteParameter.Optional}
             );
 
+            //для двух аргументов
+            /* config.Routes.MapHttpRoute("NuApi",
+                 "api/{controller}/{idSpcr}/{id}",
+                 new {idSpcr = RouteParameter.Optional, id = RouteParameter.Optional },
+                 new {controller = "Nu"}
+             );*/
+
+            config.Routes.MapHttpRoute("NuApi",
+                "api/{controller}/{action}/{id}",
+                new {idSpcr = RouteParameter.Optional, id = RouteParameter.Optional},
+                new {controller = "Nu"}
+                );
 
             // Раскомментируйте следующую строку кода, чтобы включить поддержку запросов для действий с типом возвращаемого значения IQueryable или IQueryable<T>.
             // Чтобы избежать обработки неожиданных или вредоносных запросов, используйте параметры проверки в QueryableAttribute, чтобы проверять входящие запросы.

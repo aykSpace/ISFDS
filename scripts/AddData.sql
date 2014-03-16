@@ -57,3 +57,20 @@ VALUES (1,1,0)
 INSERT INTO [Spacecraft].[SpaceсraftCommonData] ([SpacecraftInitDataId],[MIC_Id],[EngineId])
 VALUES (1,3,0)
 SELECT * FROM [Spacecraft].[SpaceсraftCommonData]
+
+
+INSERT INTO Spacecraft.Engine (NameEngine, Trust, SpecificImpulse, FuelAmount, MaxTimeOfWorking, TypeOfEngine, Comment)
+VALUES (N'Маршевый двигатель', 0.0014, 1000, null, 6000, N'ЭрДУ', N'Электрореактивная двигательная установка')
+
+SELECT * FROM Spacecraft.Engine
+
+INSERT INTO Spacecraft.SpacecraftInitialData (SpacecraftNumber, SpacecraftName, SpacecraftType, OrbitType, Launcher, ReboostBlockType, DateOfLaunch,
+											  MassInerCharacteristicId, EngineID, Comments)
+VALUES (2, N'Канопус-В', N'ДЗЗ', N'Солнечносинхронная', N'Союз', N'Фрегат', '2012-22-07 09:41:38', 3, 1, N'Спутник для съемок Земли с солнечносинхронной орбиты')
+
+SELECT * FROM Spacecraft.SpacecraftInitialData
+
+SELECT * FROM Spacecraft.MassInertialCharacteristic
+UPDATE Spacecraft.SpacecraftInitialData SET MassInerCharacteristicId = 2 WHERE SpacecraftInitDataId = 3 
+
+SELECT * FROM NU

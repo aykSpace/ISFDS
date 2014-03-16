@@ -1,8 +1,10 @@
-﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model MassInertialCharactViewModel
 
 @{
     ViewBag.Title = "EditMic";
     Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
 }
 
 @section Title
@@ -11,7 +13,7 @@
 }
 @section Reference
 {
-    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li><a href="@Url.Action("Index",@viewModel.CotrollerName,  new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
     <li class="active"><i class="fa fa-edit"></i>Изменение МИХ</li>
 }
 
@@ -90,7 +92,7 @@
                     <p>
                         <input type="submit" class="btn btn-primary" value="Изменить" />
                         <input type="reset" class="btn btn-default" value="Очистить" />
-                        @Html.ActionLink("На главную", "Index",new { id = Session["SpCrId"] }, new {@class = "btn btn-default"})
+                        @Html.ActionLink("На главную", "Index",@viewModel.CotrollerName, new { id = Session["SpCrId"] }, new {@class = "btn btn-default"})
                     </p>
                 </fieldset>
             }

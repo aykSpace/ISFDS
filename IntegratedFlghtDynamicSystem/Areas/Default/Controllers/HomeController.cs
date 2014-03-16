@@ -7,8 +7,8 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
     {
         public ActionResult Index()
         {
-            var test = UnitOfWork;
-            return View();
+            var model = UnitOfWork.SpacecraftInfoRepository.Get();
+            return View(model);
         }
 
         public ActionResult About()
