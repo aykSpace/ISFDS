@@ -1,0 +1,43 @@
+﻿@model  PagedList.IPagedList<IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.MassInertialCharactViewModel>
+@using PagedList.Mvc
+<link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet"/>
+<div class="table" id="mic-container">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Идентификатор МИХ</th>
+                <th>Масса</th>
+                <th>Бал.коэффициент</th>
+                <th>Дата МИХ</th>
+                <th>Комментарий</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mic in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => mic.ID_MIC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => mic.Mass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => mic.Sbal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => mic.DateOfID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => mic.Comment)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pager" style="text-align: center">
+        @Html.PagedListPager(Model, page => Url.Action("GetAvaliableMic", new {page}))
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/ajaxPaging")

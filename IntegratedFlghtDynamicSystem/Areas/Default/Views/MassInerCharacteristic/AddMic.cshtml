@@ -1,0 +1,97 @@
+﻿@using System.Globalization
+@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model MassInertialCharactViewModel
+
+<section>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="alert alert-dismissable alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Вводите данные внимательно!</strong>
+            </div>
+
+            @{Html.EnableClientValidation();}
+            @{Html.EnableUnobtrusiveJavaScript();}
+            @using (Html.BeginForm("AddMic", "MassInerCharacteristic", FormMethod.Post, new { id = "addMicForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Массо-иненрционные характеристики</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Mass)
+                        @Html.TextBoxFor(model => model.Mass, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Mass, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sbal)
+                        @Html.TextBoxFor(model => model.Sbal, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Sbal, null, new { @class = "error" })
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.XT)
+                        @Html.TextBoxFor(model => model.XT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.XT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.YT)
+                        @Html.TextBoxFor(model => model.YT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.YT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ZT)
+                        @Html.TextBoxFor(model => model.ZT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ZT, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfID)
+                        <input class="form-control" data-val="true" data-val-date="Поле Дата записи МИХ должно содержать дату."
+                               data-val-required="Требуется поле Дата записи МИХ." id="DateOfID" name="DateOfID" type="text" value="@DateTime.Now.ToString("d", CultureInfo.InvariantCulture)">
+                        @Html.ValidationMessageFor(model => model.DateOfID, null, new { @class = "error" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Liter)
+                        @Html.TextBoxFor(model => model.Liter, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Liter, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comment)
+                        @Html.TextBoxFor(model => model.Comment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Comment, null, new { @class = "error" })
+                    </div>
+
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="Добавить" />
+                        <input type="reset" class="btn btn-default" value="Очистить" />
+                    </p>
+                </fieldset>
+            }
+
+            <div id="successResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+
+            <div id="errorResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Ошибка!</strong>Позовите администратора!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

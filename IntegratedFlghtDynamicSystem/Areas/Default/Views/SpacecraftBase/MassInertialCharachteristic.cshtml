@@ -66,7 +66,7 @@
 
                     </div>
                     <a href="@Url.Action("SetCurrentMic", @viewModel.CotrollerName)" class="btn btn-success" id="check"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
-                    <a href="@Url.Action("AddMic", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
+                    <a href="@Url.Action("ShowAddmic", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
                     <a href="@Url.Action("EditMic", @viewModel.CotrollerName, new {id = Model.ID_MIC})" class="btn btn-warning" id="edit">Изменить</a>
                     <a href="@Url.Action("DeleteMic", @viewModel.CotrollerName, new {id = Model.ID_MIC})" class="btn btn-danger" id="delete">Удалить</a>
                 </div>

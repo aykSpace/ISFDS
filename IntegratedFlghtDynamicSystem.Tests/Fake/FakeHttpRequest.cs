@@ -50,6 +50,11 @@ namespace IntegratedFlghtDynamicSystem.Tests.Fake
             }
         }
 
+        public static bool IsAjaxRequest()
+        {
+            return true;
+        }
+
     }
 
 

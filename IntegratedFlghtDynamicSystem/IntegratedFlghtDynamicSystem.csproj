@@ -63,6 +63,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dll_vitok\OrbitElementsCalc\Release\OrbitElementsCalc.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -221,6 +229,7 @@
     <Compile Include="Areas\Default\Controllers\AccountController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\ISSController.cs" />
+    <Compile Include="Areas\Default\Controllers\MassInerCharacteristicController.cs" />
     <Compile Include="Areas\Default\Controllers\SpacecraftBaseController.cs" />
     <Compile Include="Areas\Default\DefaultAreaRegistration.cs" />
     <Compile Include="Areas\Default\Models\Client.cs" />
@@ -232,6 +241,7 @@
     <Compile Include="Areas\Default\Models\IFactory.cs" />
     <Compile Include="Areas\Default\Models\IOperation.cs" />
     <Compile Include="Areas\Default\Models\OperationPredict.cs" />
+    <Compile Include="Areas\Default\ViewModels\EngineViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\MainSpacecraftLayoutViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\MassInertialCharactViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\NuViewModel.cs" />
@@ -249,6 +259,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global\IConfig.cs" />
+    <Compile Include="Mappers\EngineMapper.cs" />
     <Compile Include="Mappers\MassInerCharactMapper.cs" />
     <Compile Include="Mappers\NuMapper.cs" />
     <Compile Include="Mappers\SpacecraftMapper.cs" />
@@ -304,6 +315,7 @@
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\morris.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\redmond\images\animated-overlay.gif" />
     <Content Include="Content\redmond\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\redmond\images\ui-bg_flat_50_5c5c5c_40x100.png" />
@@ -436,16 +448,22 @@
     <Content Include="Areas\Default\Views\SpacecraftBase\CalculateOrbitElements.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\Index.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\MassInertialCharachteristic.cshtml" />
-    <Content Include="Areas\Default\Views\SpacecraftBase\AddMic.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\ShowAddMic.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\EditMic.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\DeleteMic.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\AddSpacecraft.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\GetAvaliableMic.cshtml" />
+    <Content Include="Areas\Default\Views\MassInerCharacteristic\AddMic.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ShowAddMicForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\GetAvaliableEngines.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />
     <Content Include="OrbitElementsCalc.dll" />
+    <Content Include="Scripts\addMic.js" />
+    <Content Include="Scripts\ajaxPaging.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chartsScript.js" />

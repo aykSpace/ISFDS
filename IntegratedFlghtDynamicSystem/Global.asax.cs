@@ -15,7 +15,7 @@ namespace IntegratedFlghtDynamicSystem
     // Примечание: Инструкции по включению классического режима IIS6 или IIS7 
     // см. по ссылке http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -43,11 +43,11 @@ namespace IntegratedFlghtDynamicSystem
             AuthConfig.RegisterAuth();
         }
 
-        protected void Application_Error()
-        {
-            Exception lastException = Server.GetLastError();
-             var logger = NLog.LogManager.GetCurrentClassLogger();
-            logger.Fatal(lastException);
-        }
+        //protected void Application_Error()
+        //{
+        //    Exception lastException = Server.GetLastError();
+        //     var logger = NLog.LogManager.GetCurrentClassLogger();
+        //    logger.Fatal(lastException);
+        //}
     }
 }

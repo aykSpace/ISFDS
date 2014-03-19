@@ -27,6 +27,21 @@ namespace IntegratedFlghtDynamicSystem.Controllers
             }
         }
 
+        private IMapper _engineMapper;
+
+        public IMapper EngineMapper
+        {
+            get
+            {
+                return _engineMapper ?? new EngineMapper();
+            }
+            set
+            {
+                _engineMapper = value;
+            }
+        }
+
+
         public static NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
 

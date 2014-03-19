@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-weibo"></i>Администрирование КА</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table">
+                        <table class="table table-bordered table-hover table-striped">
+                            @foreach (var spcraft in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.SpacecraftNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.SpacecraftName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.SpacecraftType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.Launcher)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.DateOfLaunch)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => spcraft.Comments)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Index", new { id = spcraft.SpacecraftInitDataId }) |
+                                        @Html.ActionLink("Delete", "Index", new { id = spcraft.SpacecraftInitDataId })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <div class="text-right form-inline">
+                            <a href="@Url.Action("AddSpacecraft")" class="btn btn-primary" id="check"><i class="fa fa-plus"></i> Добавить КА</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

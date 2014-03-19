@@ -1,0 +1,37 @@
+﻿@model IEnumerable<IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.EngineViewModel>
+
+<div class="table">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.ID_Engine)</th>
+                <th>@Html.DisplayNameFor(m => m.NameEngine)</th>
+                <th>@Html.DisplayNameFor(m => m.Trust)</th>
+                <th>@Html.DisplayNameFor(m => m.SpecificImpulse)</th>
+                <th>@Html.DisplayNameFor(m => m.Comment)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var engine in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => engine.ID_Engine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.NameEngine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.Trust)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.SpecificImpulse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.Comment)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

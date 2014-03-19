@@ -31,7 +31,7 @@
                     <ul class="nav navbar-nav navbar-right ul-menu top-margin">
                         @if (User.IsInRole("operator") || User.IsInRole("admin"))
                         {
-                            <li>@Html.ActionLink("Информационные средства", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Информационные средства", "Index", "Home", new {area = "Admin"}, null)</li>
                         }
 
                         <li class="dropdown">
@@ -46,10 +46,8 @@
                         </li>
                         @if (Request.IsAuthenticated)
                         {
-                            if (User.IsInRole("researcher") || User.IsInRole("admin"))
-                            {
-                            <li>@Html.ActionLink("Админка", "Index", "Home")</li>
-                            }
+
+                            <li>@Html.ActionLink("Админка", "Index", "Home", new {area = "Admin"}, null)</li>
 
                         }
                         <li class="dropdown">

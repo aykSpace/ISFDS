@@ -52,15 +52,17 @@ namespace IntegratedFlghtDynamicSystem.Tests.Fake
 
         public FakeControllerContext
             (
-                ControllerBase controller,
-                string userName,
-                string[] roles,
-                NameValueCollection formParams,
-                NameValueCollection queryStringParams,
-                HttpCookieCollection cookies,
-                SessionStateItemCollection sessionItems
+            ControllerBase controller,
+            string userName,
+            string[] roles,
+            NameValueCollection formParams,
+            NameValueCollection queryStringParams,
+            HttpCookieCollection cookies,
+            SessionStateItemCollection sessionItems
             )
-            : base(new FakeHttpContext(new FakePrincipal(new FakeIdentity(userName), roles), formParams, queryStringParams, cookies, sessionItems), new RouteData(), controller)
-        { }
+            : base(
+                new FakeHttpContext(new FakePrincipal(new FakeIdentity(userName), roles), formParams, queryStringParams,
+                    cookies, sessionItems), new RouteData(), controller)
+        {}
     }
 }

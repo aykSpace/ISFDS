@@ -213,49 +213,9 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddMic()
+        public ActionResult ShowAddMic()
         {
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddMic(MassInertialCharactViewModel micViewModel)
-        {
-            var dateMic = Request["DateOfID"] ?? micViewModel.DateOfID.ToString("d", CultureInfo.InvariantCulture);
-            const string format = "MM/dd/yyyy";
-            var provider = CultureInfo.InvariantCulture;
-            micViewModel.DateOfID = DateTime.ParseExact(dateMic, format, provider);
-            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
-            try
-            {
-                var mic = (MassInertialCharacteristic)MassInerCharactMapper.Map(micViewModel, typeof(MassInertialCharactViewModel),
-                    typeof(MassInertialCharacteristic));
-                UnitOfWork.MicRepository.Insert(mic);
-
-                var currentEngineId = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).EngineID;
-
-                UnitOfWork.SpacecraftCommonDataRepository.Insert(new SpaceсraftCommonData
-                {
-                    SpacecraftInitDataId = idSpcr,
-                    EngineId = currentEngineId,
-                    MIC_Id = mic.ID_MIC
-                });
-                UnitOfWork.Save();
-            }
-            catch (DataException exception)
-            {
-                ViewBag.Error = Resources.Resource.DatabaseError;
-                Logger.Error(exception.Message);
-                return View();
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception.Message);
-                ViewBag.Error = Resources.Resource.UnexpectedError;
-                return View();
-            }
-            return RedirectToAction("Index", new { id = idSpcr });
         }
 
 

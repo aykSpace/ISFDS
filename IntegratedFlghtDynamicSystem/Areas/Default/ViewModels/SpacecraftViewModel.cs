@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 {
     public class SpacecraftViewModel
     {
-        [Required]
+        
         [Display(Name = "Идентификатор КА")]
         public int SpacecraftInitDataId { get; set; }
 
-        [Required]
         [Display(Name = "Номер КА")]
         public int SpacecraftNumber { get; set; }
 
@@ -16,9 +16,14 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         [Display(Name = "Название КА")]
         public string SpacecraftName { get; set; }
 
-        [Required]
         [Display(Name = "Международный номер КА")]
         public string InternationalNumber { get; set; }
+
+        [Display(Name = "Номер ЦККП")]
+        public int? CCSANumber { get; set; }
+
+        [Display(Name = "Номер NORAD")]
+        public int? NORADNumber { get; set; }
 
         [Required]
         [Display(Name = "Тип КА")]
@@ -28,16 +33,21 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         [Display(Name = "Тип орбиты")]
         public string OrbitType { get; set; }
 
-        [Required]
-        [Display(Name = "Ракета выведения")]
+        [Display(Name = "Ракета-носитель")]
         public string Launcher { get; set; }
 
-        [Display(Name = "Дата старта")]
-        public string DateOfLaunch { get; set; }
+        [Display(Name = "Разгонный блок")]
+        public string ReboostBlockType { get; set; }
 
-        [Required]
+        [Display(Name = "Дата старта")]
+        public DateTime? DateOfLaunch { get; set; }
+
+
         [Display(Name = "Идентификатор МИХ")]
         public int MassInerCharacteristicId  { get; set; }
+
+        [Display(Name = "Идентификатор ДУ")]
+        public int EngineID { get; set; }
 
         [Display(Name = "Комментарии")]
         public string Comments { get; set; }
