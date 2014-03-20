@@ -36,41 +36,47 @@
                             <tbody>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.SpacecraftNumber)</strong></td>
-                                    <td>@Model.SpacecraftNumber</td> 
+                                    <td>@Model.SpacecraftNumber</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.InternationalNumber)</strong></td>
-                                    <td>@Model.InternationalNumber</td> 
+                                    <td>@Model.InternationalNumber</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.SpacecraftType)</strong></td>
-                                    <td>@Model.SpacecraftType</td> 
+                                    <td>@Model.SpacecraftType</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.OrbitType)</strong></td>
-                                    <td>@Model.OrbitType</td> 
+                                    <td>@Model.OrbitType</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.Launcher)</strong></td>
-                                    <td>@Model.Launcher</td> 
+                                    <td>@Model.Launcher</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.DateOfLaunch)</strong></td>
-                                    <td>@Model.DateOfLaunch</td> 
+                                    <td>@Model.DateOfLaunch</td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.MassInerCharacteristicId)</strong></td>
-                                    <td><a href="@Url.Action("MassInertialCharachteristic",@viewModel.CotrollerName, new {id = @Model.MassInerCharacteristicId})">@Model.MassInerCharacteristicId</a></td> 
+                                    <td><a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = @Model.MassInerCharacteristicId })">@Model.MassInerCharacteristicId</a></td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.Comments)</strong></td>
-                                    <td>@Model.Comments</td> 
+                                    <td>@Model.Comments</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="text-right">
-                            <a href="@Url.Action("MassInertialCharachteristic",@viewModel.CotrollerName, new {id = @Model.MassInerCharacteristicId})">Управлние МИХами 
-                                <i class="fa fa-arrow-circle-right"></i></a>
+                        <div class="row">
+                            <div class="col-lg-offset-1 col-lg-5">
+                                <a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = 123 })">Управлние ДУ 
+                                    <i class="fa fa-arrow-circle-down"></i></a>
+                            </div>
+                            <div class="col-lg-offset-1 col-lg-5">
+                                <a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = @Model.MassInerCharacteristicId })">Управлние МИХами 
+                                    <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>

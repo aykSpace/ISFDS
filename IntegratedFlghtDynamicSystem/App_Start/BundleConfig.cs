@@ -50,7 +50,7 @@ namespace IntegratedFlghtDynamicSystem
                 "~/Scripts/chartsScript.js"));
             bundles.Add(new ScriptBundle("~/Scripts/spCrInitialData").Include("~/Scripts/spCrInitialData.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/addMic").Include("~/Scripts/addMic.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/addData").Include("~/Scripts/addData.js"));
             bundles.Add(new ScriptBundle("~/Scripts/ajaxPaging").Include("~/Scripts/ajaxPaging.js"));
 
         }

@@ -1,28 +1,48 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
 using IntegratedFlghtDynamicSystem.Models;
+using PagedList;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
     public class MassInerCharacteristicController : BaseController
     {
         /// <summary>
+        /// Возвращает достуные МИХ постранично
+        /// </summary>
+        /// <returns></returns>
+        public PartialViewResult GetMic(int? page)
+        {
+            int pageNumber = page ?? 1;
+            const int pageSize = 5;
+            var mics = UnitOfWork.MicRepository.Get();
+            var micVMs =
+                mics.Select(
+                    m =>
+                        (MassInertialCharactViewModel)
+                            MassInerCharactMapper.Map(m, typeof(MassInertialCharacteristic),
+                                typeof(MassInertialCharactViewModel)));
+            return PartialView(micVMs.ToPagedList(pageNumber, pageSize));
+        }
+
+
+        /// <summary>
         /// Добавить новые МИХ
         /// </summary>
         /// <returns></returns>
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public PartialViewResult AddMic()
         {
             return PartialView();
         }
 
-        [System.Web.Mvc.HttpPost, ValidateInput(false)]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddMic(MassInertialCharactViewModel micViewModel)
         {

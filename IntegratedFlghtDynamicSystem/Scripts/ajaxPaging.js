@@ -2,11 +2,14 @@
     _this = this;
 
     this.init = function () {
-        $('#pager').on('click', 'a', function (e) {
+        onPageClick('pagerMic');
+        onPageClick('pagerEngine');
+    };
+
+    function onPageClick(pagerId) {
+
+        $('#'+pagerId).on('click', 'li:not(.active) a', function (e) {
             e.preventDefault();
-            if (this.href == undefined) {
-                return;
-            }
             $.ajax({
                 url: this.href,
                 type: 'GET',
@@ -15,8 +18,10 @@
                     $('#mic-container').html(result);
                 }
             });
+
         });
-    };
+        
+    }
 }
 
 var ajaxPaging = null;

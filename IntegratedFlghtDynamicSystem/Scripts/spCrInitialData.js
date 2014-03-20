@@ -51,7 +51,7 @@ $(document).ready(function () {
         var url = $(this).attr('href');
         showMassInerCharacteristicGuidePanel(url);
     });
-    $('.text-right a').click(function (e) {
+    $('.col-lg-offset-1 .col-lg-5 a').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         showMassInerCharacteristicGuidePanel(url);

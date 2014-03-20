@@ -1,9 +1,11 @@
 ﻿
+@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 @using IntegratedFlghtDynamicSystem.Models.Grid;
 
 @{
     ViewBag.Title = "МКС";
     Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
 
     int pageSize = 20;
     if (Session["NuGridSettings"] != null)
@@ -27,7 +29,7 @@
 
 @section Reference
 {
-    <li><a href="@Url.Action("Index", new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li><a href="@Url.Action("Index",viewModel.CotrollerName, new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
     <li class="active"><i class="fa fa-bars"></i>&nbsp;Начальные условия</li>
 }
 
@@ -100,5 +102,6 @@
 </section>
 @section scripts
 {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")"></script>
     @Scripts.Render("~/Scripts/nuGrid")
 }
