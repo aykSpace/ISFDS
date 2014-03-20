@@ -1,0 +1,44 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.EngineViewModel>
+
+<div class="table">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.First().ID_Engine)</th>
+                <th>@Html.DisplayNameFor(m => m.First().NameEngine)</th>
+                <th>@Html.DisplayNameFor(m => m.First().Trust)</th>
+                <th>@Html.DisplayNameFor(m => m.First().SpecificImpulse)</th>
+                <th>@Html.DisplayNameFor(m => m.First().Comment)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var engine in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => engine.ID_Engine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.NameEngine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.Trust)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.SpecificImpulse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => engine.Comment)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pagerEngine" style="text-align: center">
+        @Html.PagedListPager(Model, page => Url.Action("GetEngines", new { page }))
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/ajaxPaging")
+

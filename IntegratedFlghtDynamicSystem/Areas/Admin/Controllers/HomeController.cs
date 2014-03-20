@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 ﻿using System.Data;
 using System.Linq;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+>>>>>>> Admincontroller
 using System.Web.Mvc;
 using AutoMapper;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
 using IntegratedFlghtDynamicSystem.Models;
+<<<<<<< HEAD
 using PagedList;
+=======
+>>>>>>> Admincontroller
 
 namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
 {
@@ -13,10 +23,14 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/Home/
+<<<<<<< HEAD
         /// <summary>
         /// Main page of admin area with list of servicing spacecrafts
         /// </summary>
         /// <returns>main page</returns>
+=======
+
+>>>>>>> Admincontroller
         public ActionResult Index()
         {
             var spacecrafts = UnitOfWork.SpacecraftInfoRepository.Get();
@@ -27,16 +41,20 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
             return View(spcrVm);
         }
 
+<<<<<<< HEAD
 
         /// <summary>
         /// Add spacecraft initial data and automatically spacecraftCommonData 
         /// </summary>
         /// <returns></returns>
+=======
+>>>>>>> Admincontroller
         public ActionResult AddSpacecraft()
         {
             return View();
         }
 
+<<<<<<< HEAD
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddSpacecraft(SpacecraftViewModel spacecraftViewModel)
@@ -88,5 +106,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
         }
 
 
+=======
+>>>>>>> Admincontroller
     }
 }
