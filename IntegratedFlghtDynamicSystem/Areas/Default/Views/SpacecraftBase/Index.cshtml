@@ -62,6 +62,10 @@
                                     <td><strong>@Html.DisplayNameFor(m => m.MassInerCharacteristicId)</strong></td>
                                     <td><a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = @Model.MassInerCharacteristicId })">@Model.MassInerCharacteristicId</a></td>
                                 </tr>
+                                <tr id="engines-ref">
+                                    <td><strong>@Html.DisplayNameFor(m => m.EngineID)</strong></td>
+                                    <td><a href="@Url.Action("Engines", @viewModel.CotrollerName, new { id = @Model.EngineID })">@Model.EngineID</a></td>
+                                </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(m => m.Comments)</strong></td>
                                     <td>@Model.Comments</td>
@@ -70,11 +74,11 @@
                         </table>
                         <div class="row">
                             <div class="col-lg-offset-1 col-lg-5">
-                                <a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = 123 })">Управлние ДУ 
+                                <a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = @Model.MassInerCharacteristicId })">Управлние МИХами 
                                     <i class="fa fa-arrow-circle-down"></i></a>
                             </div>
-                            <div class="col-lg-offset-1 col-lg-5">
-                                <a href="@Url.Action("MassInertialCharachteristic", @viewModel.CotrollerName, new { id = @Model.MassInerCharacteristicId })">Управлние МИХами 
+                            <div class="col-lg-offset-1 col-lg-5" id="engineGuidence">
+                                <a href="@Url.Action("Engines", @viewModel.CotrollerName, new { id = @Model.EngineID})">Управлние ДУ 
                                     <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -82,10 +86,15 @@
                 </div>
             </div>
         </div>
-        <div id="mic-container">
-        </div>
+        <div id="engine-container"></div>
+        
+    </div>
+    <div class="row">
+        <div id="mic-container"></div>
     </div>
 </section>
+<a href="@Url.Action("GetMic", @viewModel.CotrollerName)" id="getJsonMic" class="hidden"></a>
+<a href="@Url.Action("GetEngine", @viewModel.CotrollerName)" id="getJsonEngine" class="hidden"></a>
 
 @section Scripts
 {

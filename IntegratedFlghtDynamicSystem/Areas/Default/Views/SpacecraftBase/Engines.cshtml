@@ -1,0 +1,76 @@
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model EngineViewModel
+
+@{
+    var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
+}
+
+<div class="col-lg-5">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
+        </div>
+        <div class="panel-body">
+            <div class="table">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-list"></i>Поле </th>
+                            <th><i class="fa fa-edit"></i>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody id="engineInerData">
+                    </tbody>
+                    <script type="text/javascript" src="@Url.Content("~/Scripts/jQuery.tmpl.min.js")"></script>
+                    <script id="engineTmp" type="text/x-jquery-tmpl">
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.NameEngine)</strong></td>
+                            <td>${NameEngine}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Trust)</strong></td>
+                            <td>${Trust}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.SpecificImpulse)</strong></td>
+                            <td>${SpecificImpulse}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.FuelAmount)</strong></td>
+                            <td>${FuelAmount}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.MaxTimeOfWorking)</strong></td>
+                            <td>${MaxTimeOfWorking}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.TypeOfEngine)</strong></td>
+                            <td>${TypeOfEngine}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(m => m.Comment)</strong></td>
+                            <td>${Comment}</td>
+                        </tr>
+                    </script>
+                </table>
+                <div class="text-center form-inline">
+                    <div class="form-group">
+                        <label>ДУ:</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("AvalibleEngine", Model.AvalibleMicIdSelectListItems, new { @id = "aval-engine", @class = "form-control" })
+
+                    </div>
+                    <a href="@Url.Action("SetCurrentMic", @viewModel.CotrollerName)" class="btn btn-success" id="checkEngine"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
+                    <a href="@Url.Action("ShowAddmic", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
+                    <a href="@Url.Action("EditMic", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-warning" id="editEngine">Изменить</a>
+                    <a href="@Url.Action("DeleteMic", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-danger" id="deleteEngine">Удалить</a>
+                </div>
+            </div>
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Текущий идентификатор ДУ:&nbsp;</strong> @Session["EngineId"]
+            </div>
+        </div>
+    </div>
+</div>

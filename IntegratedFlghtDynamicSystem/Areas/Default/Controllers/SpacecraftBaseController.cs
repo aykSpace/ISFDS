@@ -171,8 +171,33 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             return PartialView(micVm);
         }
 
+
+        //
+        // GET: /Default/ISS/Engines
+
         /// <summary>
-        /// Возвращает выбранные по идентификатору МИХ
+        /// Управление ДУ
+        /// </summary>
+        /// <returns></returns>
+        public virtual PartialViewResult Engines()
+        {
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            var engineVm = new EngineViewModel();
+            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
+            engineVm.ID_Engine = spCr.EngineID;
+            var listOfCommonDatas = UnitOfWork.SpacecraftCommonDataRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
+            foreach (var spaceсraftCommonData in listOfCommonDatas)
+            {
+                engineVm.AvalibleEnginecId.Add(spaceсraftCommonData.EngineId);
+            }
+            Session["EngineId"] = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).EngineID;
+
+            return PartialView(engineVm);
+        }
+
+
+        /// <summary>
+        /// Возвращает выбранный по идентификатору МИХ
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Json</returns>
@@ -184,6 +209,24 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                 var micVm = (MassInertialCharactViewModel)MassInerCharactMapper.Map(mic, typeof(MassInertialCharacteristic),
                 typeof(MassInertialCharactViewModel));
                 return Json(micVm, JsonRequestBehavior.AllowGet);
+            }
+            return HttpNotFound("Mass inertial characteristic not found");
+        }
+
+
+        /// <summary>
+        /// Возвращает выбранный по идентификатору ДУ
+        /// </summary>
+        /// <param name="id">id engine</param>
+        /// <returns>Json</returns>
+        public ActionResult GetEngine(int id)
+        {
+            var engine = UnitOfWork.EngineRepository.GetById(id);
+            if (engine != null)
+            {
+                var engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
+                typeof(EngineViewModel));
+                return Json(engineVm, JsonRequestBehavior.AllowGet);
             }
             return HttpNotFound("Mass inertial characteristic not found");
         }

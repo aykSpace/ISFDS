@@ -461,6 +461,7 @@
     <Content Include="Areas\Default\Views\MassInerCharacteristic\GetMic.cshtml" />
     <Content Include="Areas\Default\Views\Engine\AddEngine.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ShowAddEngineForm.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\Engines.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />

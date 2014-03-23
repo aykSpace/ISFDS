@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 {
@@ -31,5 +33,27 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 
         [Display(Name = "Комментарий")]
         public string Comment { get; set; }
+
+
+        private List<int> _avalibleEngineId = new List<int>();
+
+        public List<int> AvalibleEnginecId
+        {
+            get { return _avalibleEngineId; }
+
+        }
+        [Display (Name = "Досупные двигатели")]
+        public IEnumerable<SelectListItem> AvalibleMicIdSelectListItems
+        {
+            get
+            {
+                return AvalibleEnginecId.Select((t, i) => new SelectListItem
+                {
+                    Value = i.ToString(CultureInfo.InvariantCulture),
+                    Text = t.ToString(CultureInfo.InvariantCulture),
+                    Selected = ID_Engine == t
+                });
+            }
+        } 
     }
 }
