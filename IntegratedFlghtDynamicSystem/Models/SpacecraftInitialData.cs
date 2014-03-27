@@ -17,6 +17,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         public SpacecraftInitialData()
         {
             this.NUs = new HashSet<NU>();
+            this.SpacecraftsEngines = new HashSet<SpacecraftsEngine>();
             this.SpaceсraftCommonData = new HashSet<SpaceсraftCommonData>();
         }
     
@@ -38,6 +39,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         public virtual ICollection<NU> NUs { get; set; }
         public virtual Engine Engine { get; set; }
         public virtual MassInertialCharacteristic MassInertialCharacteristic { get; set; }
+        public virtual ICollection<SpacecraftsEngine> SpacecraftsEngines { get; set; }
         public virtual ICollection<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
     }
 }

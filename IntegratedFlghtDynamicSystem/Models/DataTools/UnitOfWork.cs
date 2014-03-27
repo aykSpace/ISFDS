@@ -15,7 +15,8 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         private GenericRepository<NU> _nuRepository;
         private GenericRepository<MassInertialCharacteristic> _micRepository;
         private GenericRepository<Engine> _engineRepository;
-        private GenericRepository<SpaceсraftCommonData> _spcraftCommonDataRepository; 
+        private GenericRepository<SpaceсraftCommonData> _spcraftCommonDataRepository;
+        private GenericRepository<SpacecraftsEngine> _spcraftEnginesRepository; 
 
         public GenericRepository<SpacecraftInitialData> SpacecraftInfoRepository
         {
@@ -26,6 +27,16 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         {
             get { return _spcraftCommonDataRepository ?? (_spcraftCommonDataRepository = new GenericRepository<SpaceсraftCommonData>(_context)); }
         }
+
+        public GenericRepository<SpacecraftsEngine> SpacecraftEnginesRepository
+        {
+            get
+            {
+                return _spcraftEnginesRepository ??
+                       (_spcraftEnginesRepository = new GenericRepository<SpacecraftsEngine>(_context));
+            }
+        } 
+
 
         public GenericRepository<NU> NuRepository
         {

@@ -8,7 +8,7 @@
 <div class="col-lg-5">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
+            <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Характеристики двигательной установки</h3>
         </div>
         <div class="panel-body">
             <div class="table">
@@ -59,12 +59,11 @@
                     </div>
                     <div class="form-group">
                         @Html.DropDownList("AvalibleEngine", Model.AvalibleMicIdSelectListItems, new { @id = "aval-engine", @class = "form-control" })
-
                     </div>
-                    <a href="@Url.Action("SetCurrentMic", @viewModel.CotrollerName)" class="btn btn-success" id="checkEngine"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
-                    <a href="@Url.Action("ShowAddmic", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
-                    <a href="@Url.Action("EditMic", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-warning" id="editEngine">Изменить</a>
-                    <a href="@Url.Action("DeleteMic", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-danger" id="deleteEngine">Удалить</a>
+                    <a href="@Url.Action("SetCurrentEngine", @viewModel.CotrollerName)" class="btn btn-success" id="checkEngine"><i class="fa fa-check"></i>&nbsp;Выбрать</a>
+                    <a href="@Url.Action("ShowAddEngine", @viewModel.CotrollerName)" class="btn btn-primary">Добавить</a>
+                    <a href="@Url.Action("ShowEditEngine", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-warning" id="editEngine">Изменить</a>
+                    <a href="@Url.Action("ShowDeleteEngine", @viewModel.CotrollerName, new {id = Model.ID_Engine})" class="btn btn-danger" id="deleteEngine">Удалить</a>
                 </div>
             </div>
             <div class="alert alert-dismissable alert-success">

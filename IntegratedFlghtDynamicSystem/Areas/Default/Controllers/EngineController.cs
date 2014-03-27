@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
+using System.Net.Http;
 using System.Web.Mvc;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
 using IntegratedFlghtDynamicSystem.Models;
 using PagedList;
+using Resources;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
@@ -38,9 +40,26 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public PartialViewResult AddEngine()
+        [ActionName("AddEngine")]
+        public PartialViewResult AddEngineForm(int? id)
         {
-            return PartialView();
+            if (id == null)
+            {
+                return PartialView();
+            }
+            var engine = UnitOfWork.EngineRepository.GetById(id);
+            EngineViewModel engineVm;
+            if (engine != null)
+            {
+                engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
+                typeof(EngineViewModel));
+            }
+            else
+            {
+                ModelState.AddModelError("", Resource.Engine_not_found);
+                engineVm = new EngineViewModel();
+            }
+            return PartialView(engineVm);
         }
 
         [HttpPost]
@@ -54,28 +73,149 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                         EngineMapper.Map(engineViewModel, typeof(EngineViewModel),
                             typeof(Engine));
                 UnitOfWork.EngineRepository.Insert(engine);
+                UnitOfWork.Save();
                 if (Session["SpCrId"] != null)
                 {
                     int idSpcr = Convert.ToInt32(Session["SpCrId"]);
-                    UnitOfWork.SpacecraftCommonDataRepository.Insert(new SpaceсraftCommonData
+                    UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngine
                     {
-                        SpacecraftInitDataId = idSpcr
+                        SpacecraftInitDataId = idSpcr,
+                        EngineId = engine.ID_Engine
                     });
+                    UnitOfWork.Save();
                 }
                 ViewBag.Success = "Engine was added!";
-                UnitOfWork.Save();
+                
             }
             catch (DataException exception)
             {
-                ViewBag.Error = Resources.Resource.DatabaseError;
+                ViewBag.Error = Resource.DatabaseError;
                 Logger.Error(exception.Message);
-                throw new HttpException(ViewBag.Error);
+                return View();
             }
             catch (Exception exception)
             {
                 Logger.Error(exception.Message);
-                ViewBag.Error = Resources.Resource.UnexpectedError;
-                throw new HttpException(ViewBag.Error);
+                ViewBag.Error = Resource.UnexpectedError;
+                return View();
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new { Message = ViewBag.Success });
+            }
+            return View();
+        }
+
+
+        /// <summary>
+        /// Редактирование двигателя
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public PartialViewResult EditEngine(int id)
+        {
+            var engine = UnitOfWork.EngineRepository.GetById(id);
+            EngineViewModel engineVm;
+            if (engine != null)
+            {
+                engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
+                typeof(EngineViewModel));
+            }
+            else
+            {
+                ModelState.AddModelError("", Resource.Engine_not_found);
+                engineVm = new EngineViewModel();
+            }
+            return PartialView(engineVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditEngine(int id, EngineViewModel engineViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid && engineViewModel.ID_Engine == id)
+                {
+                    var engine =
+                   (Engine)
+                       EngineMapper.Map(engineViewModel, typeof(EngineViewModel),
+                           typeof(Engine));
+                    UnitOfWork.EngineRepository.Update(engine);
+                    UnitOfWork.Save();
+                    ViewBag.Success = "Engine was updated!";
+                }
+            }
+
+            catch (DbUpdateConcurrencyException exception)
+            {
+                ViewBag.Error = Resource.DatabaseError;
+                Logger.Error(exception.Message);
+                throw new HttpRequestException("request exception");
+            }
+            catch (Exception exception)
+            {
+
+                Logger.Error(exception.Message);
+                ViewBag.Error = Resource.UnexpectedError;
+                throw new HttpRequestException("request exception");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new { Message = ViewBag.Success});   
+            }
+            return View();
+        }
+
+
+        /// <summary>
+        /// Удаление двигателя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PartialViewResult DeleteEngine(int id)
+        {
+            var engine = UnitOfWork.EngineRepository.GetById(id);
+            EngineViewModel engineVm;
+            if (engine != null)
+            {
+                engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
+                typeof(EngineViewModel));
+            }
+            else
+            {
+                ModelState.AddModelError("", Resource.Engine_not_found);
+                engineVm = new EngineViewModel();
+            }
+            return PartialView(engineVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteEngine(int id, EngineViewModel engineViewModel)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    UnitOfWork.EngineRepository.Delete(id);
+                    UnitOfWork.Save();
+                    ViewBag.Success = "Engine was deleted";
+                }
+            }
+
+            catch (DbUpdateConcurrencyException exception)
+            {
+                ViewBag.Error = Resource.DatabaseError;
+                Logger.Error(exception.Message);
+                throw new HttpRequestException("request exception");
+            }
+            catch (Exception exception)
+            {
+
+                Logger.Error(exception.Message);
+                ViewBag.Error = Resource.UnexpectedError;
+                throw new HttpRequestException("request exception");
             }
             if (Request.IsAjaxRequest())
             {

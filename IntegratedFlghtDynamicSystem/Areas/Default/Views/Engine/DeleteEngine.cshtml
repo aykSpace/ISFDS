@@ -1,0 +1,83 @@
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model EngineViewModel
+
+<section>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-weibo"></i>&nbsp;Массо-инерционные характеристики</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th><i class="fa fa-list"></i>Поле </th>
+                                    <th><i class="fa fa-edit"></i>Значение</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.ID_Engine)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.ID_Engine)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.NameEngine)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.NameEngine)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.Trust)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.Trust)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.SpecificImpulse)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.SpecificImpulse)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.FuelAmount)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.FuelAmount)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.MaxTimeOfWorking)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.MaxTimeOfWorking)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.TypeOfEngine)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.TypeOfEngine)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(m => m.Comment)</strong></td>
+                                    <td>@Html.DisplayTextFor(m => m.Comment)</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <div class="text-center form-inline">
+                            @using (Html.BeginForm("DeleteEngine","Engine", FormMethod.Post, new {@id = "form"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.ID_Engine, new { @name = "id" })
+                                <input type="submit" class="btn btn-danger" value="Удалить" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="successResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+
+            <div id="errorResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Ошибка!</strong>Позовите администратора!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

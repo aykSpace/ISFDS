@@ -19,7 +19,6 @@ namespace IntegratedFlghtDynamicSystem.Models
         public int MIC_Id { get; set; }
         public int EngineId { get; set; }
     
-        public virtual Engine Engine { get; set; }
         public virtual MassInertialCharacteristic MassInertialCharacteristic { get; set; }
         public virtual SpacecraftInitialData SpacecraftInitialData { get; set; }
     }

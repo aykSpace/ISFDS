@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, такую же, как Engine not found.
+        /// </summary>
+        internal static string Engine_not_found {
+            get {
+                return ResourceManager.GetString("Engine_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, такую же, как Поиск.
         /// </summary>
         internal static string NuApplyFilter {

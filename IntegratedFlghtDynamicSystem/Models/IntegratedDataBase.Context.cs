@@ -29,6 +29,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         public DbSet<Engine> Engines { get; set; }
         public DbSet<SpacecraftInitialData> SpacecraftInitialDatas { get; set; }
         public DbSet<MassInertialCharacteristic> MassInertialCharacteristics { get; set; }
+        public DbSet<SpacecraftsEngine> SpacecraftsEngines { get; set; }
         public DbSet<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
     }
 }

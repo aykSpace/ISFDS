@@ -2,7 +2,7 @@
 using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Web;
+using System.Net.Http;
 using System.Web.Mvc;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
@@ -57,28 +57,30 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                         MassInerCharactMapper.Map(micViewModel, typeof (MassInertialCharactViewModel),
                             typeof (MassInertialCharacteristic));
                 UnitOfWork.MicRepository.Insert(mic);
+                UnitOfWork.Save();
                 if (Session["SpCrId"] != null)
                 {
                     int idSpcr = Convert.ToInt32(Session["SpCrId"]);
                     UnitOfWork.SpacecraftCommonDataRepository.Insert(new SpaceсraftCommonData
                     {
-                        SpacecraftInitDataId = idSpcr
+                        SpacecraftInitDataId = idSpcr,
+                        MIC_Id = mic.ID_MIC
                     });
+                    UnitOfWork.Save();
                 }
                 ViewBag.Success = "Mic was added!";
-                UnitOfWork.Save();
             }
             catch (DataException exception)
             {
                 ViewBag.Error = Resources.Resource.DatabaseError;
                 Logger.Error(exception.Message);
-                throw new HttpException(ViewBag.Error);
+                throw new HttpRequestException("request exception");
             }
             catch (Exception exception)
             {
                 Logger.Error(exception.Message);
                 ViewBag.Error = Resources.Resource.UnexpectedError;
-                throw new HttpException(ViewBag.Error);
+                throw new HttpRequestException("request exception");
             }
             if (Request.IsAjaxRequest())
             {

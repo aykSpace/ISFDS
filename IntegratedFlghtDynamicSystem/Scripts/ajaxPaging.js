@@ -2,11 +2,11 @@
     _this = this;
 
     this.init = function () {
-        onPageClick('pagerMic');
-        onPageClick('pagerEngine');
+        onPageClick('pagerMic', 'mic-container');
+        onPageClick('pagerEngine', 'engine-container');
     };
 
-    function onPageClick(pagerId) {
+    function onPageClick(pagerId, containerId) {
 
         $('#'+pagerId).on('click', 'li:not(.active) a', function (e) {
             e.preventDefault();
@@ -15,7 +15,7 @@
                 type: 'GET',
                 cache: false,
                 success: function (result) {
-                    $('#mic-container').html(result);
+                    $('#' + containerId).html(result);
                 }
             });
 

@@ -57,8 +57,8 @@
         $('#spcr-init-data').addClass('col-lg-offset-1 col-lg-5');
     };
 
-    //and correct urls to guidance buttons
-    function addHandlers() {
+    //add correct urls to mic guidance buttons
+    function addHandlers(url) {
         var $check = $('#check');
         var $edit = $('#edit');
         var $delete = $('#delete');
@@ -68,14 +68,35 @@
         var deleteNewUrl = deleteUrl.slice(0, deleteUrl.lastIndexOf('\/'));
         var checkUrl = $check.attr('href');
         $('#aval-mic').on('change', function () {
-            var url = '/ISS/GetMic/' + $('#aval-mic option:selected').text();
+            var url1 = url + $('#aval-mic option:selected').text();
             $check.attr('href', checkUrl + '\/' + $('#aval-mic option:selected').text());
             $edit.attr('href', editNewUrl + '\/' + $('#aval-mic option:selected').text());
             $delete.attr('href', deleteNewUrl + '\/' + $('#aval-mic option:selected').text());
-            showMassInerData(url);
+            showMassInerData(url1);
         });
 
     }
+    
+    //add correct urls to engine guidance buttons
+    function addEngineHandlers(url) {
+        var $check = $('#checkEngine');
+        var $edit = $('#editEngine');
+        var editUrl = $edit.attr('href');
+        var editNewUrl = editUrl.slice(0, editUrl.lastIndexOf('\/'));
+        var $delete = $('#deleteEngine');
+        var deleteUrl = $delete.attr('href');
+        var deleteNewUrl = deleteUrl.slice(0, deleteUrl.lastIndexOf('\/'));
+        var checkUrl = $check.attr('href');
+        $('#aval-engine').on('change', function () {
+            var url1 = url + $('#aval-engine option:selected').text();
+            $check.attr('href', checkUrl + '\/' + $('#aval-engine option:selected').text());
+            $edit.attr('href', editNewUrl + '\/' + $('#aval-engine option:selected').text());
+            $delete.attr('href', deleteNewUrl + '\/' + $('#aval-engine option:selected').text());
+            showEngineData(url1);
+        });
+
+    }
+
 
     //loading mass inertial characteristic data
 
@@ -92,9 +113,10 @@
     function showMassInerCharacteristicGuidePanel(url) {
 
         $container.load(url, null, function () {
+            var getMicUrl = $('#getJsonMic').attr('href') + '\/';
             var url1 = $('#getJsonMic').attr('href') + url.substring(url.lastIndexOf('\/'));
             _this.changeClasses();
-            addHandlers();
+            addHandlers(getMicUrl);
             showMassInerData(url1);
         });
     }
@@ -102,8 +124,10 @@
     //loading guidance panel with engine data
     function showEngineGuidePanel(url) {
         $enginecontainer.load(url, null, function () {
-            var url1 = $('#getJsonEngine').attr('href') + url.substring(url.lastIndexOf('\/'));
+            var getEngineUrl = $('#getJsonEngine').attr('href') + '\/';
+            var url1 = getEngineUrl + url.substring(url.lastIndexOf('\/'));
             _this.changeClasses();
+            addEngineHandlers(getEngineUrl);
             showEngineData(url1);
         });
     }

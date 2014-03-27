@@ -14,6 +14,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
         public int ID_Engine { get; set; }
 
         [Display(Name = "Имя двигателя")]
+        [Required]
         public string NameEngine { get; set; }
 
         [Display(Name = "Тяга")]

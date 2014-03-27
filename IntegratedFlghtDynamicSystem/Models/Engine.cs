@@ -17,7 +17,7 @@ namespace IntegratedFlghtDynamicSystem.Models
         public Engine()
         {
             this.SpacecraftInitialDatas = new HashSet<SpacecraftInitialData>();
-            this.SpaceсraftCommonData = new HashSet<SpaceсraftCommonData>();
+            this.SpacecraftsEngines = new HashSet<SpacecraftsEngine>();
         }
     
         public int ID_Engine { get; set; }
@@ -30,6 +30,6 @@ namespace IntegratedFlghtDynamicSystem.Models
         public string Comment { get; set; }
     
         public virtual ICollection<SpacecraftInitialData> SpacecraftInitialDatas { get; set; }
-        public virtual ICollection<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
+        public virtual ICollection<SpacecraftsEngine> SpacecraftsEngines { get; set; }
     }
 }
