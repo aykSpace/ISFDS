@@ -124,7 +124,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Controllers
         {
 
             //act
-            var result = _controller.Index(1);
+            var result = _controller.Index();
 
             //assert
             Assert.IsInstanceOf<SpacecraftViewModel>(((ViewResult)result).Model);

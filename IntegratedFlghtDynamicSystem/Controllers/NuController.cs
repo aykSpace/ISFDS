@@ -43,7 +43,7 @@ namespace IntegratedFlghtDynamicSystem.Controllers
             return nuViewModel;
         }
 
-        //// GET api/Nu/GetSpacecrartNu/3
+        //// GET api/Nu/GetSpacecraftNu/3
         public IEnumerable<NuViewModel> GetSpacecraftNu(int id)
         {
             var nus = UnitOfWork.NuRepository.Get().Where(p => p.SpacecraftInitialData_ID == id);

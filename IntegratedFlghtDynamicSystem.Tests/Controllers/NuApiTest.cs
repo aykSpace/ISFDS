@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.SessionState;
-using System.Web.UI.WebControls;
-using IntegratedFlghtDynamicSystem.Areas.Default.Controllers;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
-using IntegratedFlghtDynamicSystem.Tests.Fake;
 using NUnit.Framework;
 
 namespace IntegratedFlghtDynamicSystem.Tests.Controllers

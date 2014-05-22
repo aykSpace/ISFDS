@@ -20,7 +20,7 @@ namespace IntegratedFlghtDynamicSystem
 
             config.Routes.MapHttpRoute("NuApi",
                 "api/{controller}/{action}/{id}",
-                new {idSpcr = RouteParameter.Optional, id = RouteParameter.Optional},
+                new {id = RouteParameter.Optional},
                 new {controller = "Nu"}
                 );
 

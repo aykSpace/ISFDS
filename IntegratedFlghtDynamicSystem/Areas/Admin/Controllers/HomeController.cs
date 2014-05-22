@@ -44,6 +44,16 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
             var spcraft = (SpacecraftInitialData)Mapper.Map(spacecraftViewModel, typeof(SpacecraftViewModel),
                     typeof(SpacecraftInitialData));
             UnitOfWork.SpacecraftInfoRepository.Insert(spcraft);
+            UnitOfWork.SpacecraftCommonDataRepository.Insert(new SpaceсraftCommonData
+            {
+                MIC_Id = spcraft.MassInerCharacteristicId,
+                SpacecraftInitDataId = spcraft.SpacecraftInitDataId
+            });
+            UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngine
+            {
+                SpacecraftInitDataId = spcraft.SpacecraftInitDataId,
+                EngineId = spcraft.EngineID
+            });
             try
             {
                 UnitOfWork.Save();

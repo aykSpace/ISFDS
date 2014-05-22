@@ -1,4 +1,5 @@
 ﻿using System;
+using IntegratedFlghtDynamicSystem.Areas.Default.Controllers;
 
 namespace IntegratedFlghtDynamicSystem.Models.DataTools
 {
@@ -16,7 +17,10 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         private GenericRepository<MassInertialCharacteristic> _micRepository;
         private GenericRepository<Engine> _engineRepository;
         private GenericRepository<SpaceсraftCommonData> _spcraftCommonDataRepository;
-        private GenericRepository<SpacecraftsEngine> _spcraftEnginesRepository; 
+        private GenericRepository<SpacecraftsEngine> _spcraftEnginesRepository;
+        private IRepository<NU> _oracleRepository; 
+        private static bool _oracleServer;
+        public bool OracleServer { get { return _oracleServer; } set { _oracleServer = value; } } //monostate pattern
 
         public GenericRepository<SpacecraftInitialData> SpacecraftInfoRepository
         {
@@ -51,6 +55,15 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         public GenericRepository<Engine> EngineRepository
         {
             get { return _engineRepository ?? (_engineRepository = new GenericRepository<Engine>(_context)); }
+        }
+
+        public IRepository<NU> OracleNuData
+        {
+            get
+            {
+                return _oracleRepository ?? (_oracleRepository = new OracleNuRepository());
+            }
+            set { _oracleRepository = value; }
         }
 
         public void Save()

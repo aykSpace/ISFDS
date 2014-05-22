@@ -18,6 +18,10 @@ namespace IntegratedFlghtDynamicSystem.Models
         public static IQueryable<NU> SearchNuByDates(IUnitOfWork unitOfWork, DateTime searchStartDate,
             DateTime searchEndDate, int idSpcr)
         {
+            if (unitOfWork.OracleServer)
+            {
+                return unitOfWork.OracleNuData.Get().AsQueryable();
+            }
             if (searchStartDate.Date == DateTime.MinValue && searchEndDate.Date == DateTime.MinValue)
             {
                 return unitOfWork.NuRepository.Context.NUs.Where(x => x.SpacecraftInitialData_ID == idSpcr).AsQueryable();
@@ -44,6 +48,12 @@ namespace IntegratedFlghtDynamicSystem.Models
                 c.SpacecraftInitialData_ID == idSpcr);
             //
             return searchResults.AsQueryable();
+        }
+
+        public static IQueryable<NU> GetNuFromOracle(IRepository<NU> repository)
+        {
+            var test = repository.Get();
+            return test.AsQueryable();
         }
     }
 }

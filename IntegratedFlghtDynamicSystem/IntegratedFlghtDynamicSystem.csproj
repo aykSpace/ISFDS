@@ -59,6 +59,10 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SpaceDebris\SpaceDebris\bin\Debug\Oracle.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="OrbitElementsCalc, Version=1.0.5130.17220, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dll_vitok\OrbitElementsCalc\Release\OrbitElementsCalc.dll</HintPath>
@@ -74,6 +78,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -227,6 +232,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpacecraftController.cs" />
     <Compile Include="Areas\Default\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Default\Controllers\CanopusController.cs" />
     <Compile Include="Areas\Default\Controllers\EngineController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\ISSController.cs" />
@@ -242,6 +248,7 @@
     <Compile Include="Areas\Default\Models\IFactory.cs" />
     <Compile Include="Areas\Default\Models\IOperation.cs" />
     <Compile Include="Areas\Default\Models\OperationPredict.cs" />
+    <Compile Include="Areas\Default\ViewModels\AvaliableServersViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\EngineViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\MainSpacecraftLayoutViewModel.cs" />
     <Compile Include="Areas\Default\ViewModels\MassInertialCharactViewModel.cs" />
@@ -251,6 +258,7 @@
     <Compile Include="Areas\Default\ViewModels\PredictTaskViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\NuController.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\ExtendedRazorViewEngine.cs" />
     <Compile Include="Filters\AcceptAjaxAttribute.cs" />
     <Compile Include="Filters\AjaxAutorizeAttribute.cs" />
@@ -266,6 +274,7 @@
     <Compile Include="Mappers\SpacecraftMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DataTools\OracleGenericRepository.cs" />
     <Compile Include="Models\DataTools\UnitOfWork.cs" />
     <Compile Include="Models\DataTools\GenericRepository.cs" />
     <Compile Include="Models\DataTools\IRepository.cs" />

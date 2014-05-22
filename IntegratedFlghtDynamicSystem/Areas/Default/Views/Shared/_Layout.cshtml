@@ -37,11 +37,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Космические аппараты<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("МКС", "Index", "ISS", new { id = "1" }, null)</li>
+                                <li>@Html.ActionLink("МКС", "Index", "ISS")</li>
                                 <li>@Html.ActionLink("Ресурс-ДК", "About", "Home")</li>
                                 <li>@Html.ActionLink("Ресурс-П", "Contact", "Home")</li>
                                 <li>@Html.ActionLink("Электро-Л", "Contact", "Home")</li>
-                                <li>@Html.ActionLink("Канопус-В", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Канопус-В", "Index", "Canopus")</li>
                             </ul>
                         </li>
                         @if (Request.IsAuthenticated)

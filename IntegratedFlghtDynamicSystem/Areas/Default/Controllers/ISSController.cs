@@ -9,7 +9,11 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
     {
         internal override sealed void InitializeViewModel()
         {
-            MainSpacecraftLayoutViewModel = new MainSpacecraftLayoutViewModel {CotrollerName = "ISS"};
+            MainSpacecraftLayoutViewModel = new MainSpacecraftLayoutViewModel
+            {
+                CotrollerName = "ISS",
+                Id = 1
+            };
             ViewData["MainSpacecraftLayoutViewModel"] = MainSpacecraftLayoutViewModel;
         }
 
