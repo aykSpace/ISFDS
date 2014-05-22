@@ -1,0 +1,89 @@
+﻿@using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
+@model EngineViewModel
+
+<section>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="alert alert-dismissable alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Вводите данные внимательно!</strong>
+            </div>
+
+            @{Html.EnableClientValidation();}
+            @{Html.EnableUnobtrusiveJavaScript();}
+            @using (Html.BeginForm("EditEngine", "Engine", FormMethod.Post, new { id = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Характеристики ДУ</legend>
+                    @Html.HiddenFor(model => model.ID_Engine)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NameEngine)
+                        @Html.TextBoxFor(model => model.NameEngine, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NameEngine, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Trust)
+                        @Html.TextBoxFor(model => model.Trust, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Trust, null, new { @class = "error" })
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SpecificImpulse)
+                        @Html.TextBoxFor(model => model.SpecificImpulse, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SpecificImpulse, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FuelAmount)
+                        @Html.TextBoxFor(model => model.FuelAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FuelAmount, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaxTimeOfWorking)
+                        @Html.TextBoxFor(model => model.MaxTimeOfWorking, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaxTimeOfWorking, null, new { @class = "error" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeOfEngine)
+                        @Html.TextBoxFor(model => model.TypeOfEngine, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TypeOfEngine, null, new { @class = "error" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Comment)
+                        @Html.TextBoxFor(model => model.Comment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Comment, null, new { @class = "error" })
+                    </div>
+
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="Редактировать" />
+                        <input type="reset" class="btn btn-default" value="Очистить" />
+                    </p>
+                </fieldset>
+            }
+
+            <div id="successResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+
+            <div id="errorResult" hidden="hidden">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Ошибка!</strong>Позовите администратора!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

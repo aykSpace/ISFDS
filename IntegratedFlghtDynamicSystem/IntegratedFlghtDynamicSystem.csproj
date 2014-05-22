@@ -301,6 +301,9 @@
     <Compile Include="Models\SpacecraftInitialData.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SpacecraftsEngine.cs">
+      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SpaceсraftCommonData.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
@@ -462,6 +465,11 @@
     <Content Include="Areas\Default\Views\Engine\AddEngine.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ShowAddEngineForm.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\Engines.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\ShowAddEngine.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\ShowEditEngine.cshtml" />
+    <Content Include="Areas\Default\Views\Engine\EditEngine.cshtml" />
+    <Content Include="Areas\Default\Views\Engine\DeleteEngine.cshtml" />
+    <Content Include="Areas\Default\Views\SpacecraftBase\ShowDeleteEngine.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />

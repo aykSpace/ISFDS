@@ -2,8 +2,8 @@
     _this = this;
 
     this.formSubmitt = function onSubmit() {
-        $('#addForm').unbind('submit').bind('submit',function () {
-            $.post(this.action, $('#addForm').serialize())
+        $('#form').unbind('submit').bind('submit',function () {
+            $.post(this.action, $('#form').serialize())
                 .success(function (result) {
                     $('#message').html(result.Message);
                     $('#successResult').show();

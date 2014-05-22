@@ -64,7 +64,8 @@ namespace IntegratedFlghtDynamicSystem.App_Start
             kernel.Bind<IRepository<NU>>().To<GenericRepository<NU>>().InRequestScope();
             kernel.Bind<IRepository<MassInertialCharacteristic>>().To<GenericRepository<MassInertialCharacteristic>>().InRequestScope();
             kernel.Bind<IRepository<Engine>>().To<GenericRepository<Engine>>().InRequestScope();
-            kernel.Bind<IRepository<SpaceñraftCommonData>>().To<GenericRepository<SpaceñraftCommonData>>();
+            kernel.Bind<IRepository<SpaceñraftCommonData>>().To<GenericRepository<SpaceñraftCommonData>>().InRequestScope();
+            kernel.Bind<IRepository<SpacecraftsEngine>>().To<GenericRepository<SpacecraftsEngine>>().InRequestScope();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
             kernel.Bind<IMapper>().To<SpacecraftMapper>().InSingletonScope();
         }
