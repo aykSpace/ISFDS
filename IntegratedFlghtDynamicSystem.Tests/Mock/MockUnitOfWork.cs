@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IntegratedFlghtDynamicSystem.Models.DataTools;
+﻿using IntegratedFlghtDynamicSystem.Models.DataTools;
 using Moq;
 
 namespace IntegratedFlghtDynamicSystem.Tests.Mock
@@ -18,6 +13,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
             GenerateSpcrComonData();
             GenerateMicData();
             Setup(p => p.Save()).Verifiable("fail save");
+            Setup(p => p.OracleServer).Returns(false);
         }
     }
 }

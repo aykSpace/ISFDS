@@ -77,9 +77,28 @@ function changeVal(id) {
     $.session.set('idNu', id);
 }
 
+/*
+function refresh() {
+    var $dropDown = $('#aval-servers');
+    $('#aval-servers option:selected').text();
+    $dropDown.unbind('change').bind('change', function () {
+        $.post(this.action, $('#_serverForm').serialize())
+                .success(function (result) {
+                    $('#message').html(result.Message);
+                    $('#successResult').show();
+                }).error(function () {
+                    $('#errorResult').show();
+                });
+        //location.reload();
+        //showGrid();
+    });
+}*/
+
+
 $(document).ready(function () {
     showGrid();
     getId();
     calcOrbElements();
+    //refresh();
 });
 

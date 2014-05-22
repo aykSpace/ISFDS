@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BalPredictCLR;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
+using IntegratedFlghtDynamicSystem.Models;
 using IntegratedFlghtDynamicSystem.Models.DataTools;
 using OrbitElementsCalc;
 
@@ -42,7 +43,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Models
             var grafDatas = new List<DiagramData>();
             try
             {
-                var nu = _unitOfWork.NuRepository.GetById(_predictTaskViewModel.IdNu);
+                NU nu = _unitOfWork.OracleServer ? _unitOfWork.OracleNuData.GetById(_predictTaskViewModel.IdNu) : _unitOfWork.NuRepository.GetById(_predictTaskViewModel.IdNu);
                 var vector = new BalVector((uint) nu.Vitok, nu.t, nu.X, nu.Y, nu.Z, nu.VX, nu.VY, nu.VZ, nu.Sbal,
                     nu.DateNU);
                 BalVector.ap = 110;

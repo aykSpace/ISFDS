@@ -1,12 +1,13 @@
-﻿
+﻿@using System.ComponentModel
+@using System.Web.UI.WebControls
 @using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels
 @using IntegratedFlghtDynamicSystem.Models.Grid;
+@model AvaliableServersViewModel
 
 @{
     ViewBag.Title = "МКС";
     Layout = "~/Areas/Default/Views/Shared/_SpCrLayout.cshtml";
     var viewModel = (MainSpacecraftLayoutViewModel)ViewData["MainSpacecraftLayoutViewModel"];
-
     int pageSize = 20;
     if (Session["NuGridSettings"] != null)
     {
@@ -29,7 +30,7 @@
 
 @section Reference
 {
-    <li><a href="@Url.Action("Index",viewModel.CotrollerName, new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
+    <li><a href="@Url.Action("Index", viewModel.CotrollerName, new { id = Session["SpCrId"] })"><i class="fa fa-dashboard"></i>Главная</a></li>
     <li class="active"><i class="fa fa-bars"></i>&nbsp;Начальные условия</li>
 }
 
@@ -64,7 +65,17 @@
                 }
             </td>
             <td>
-                <button class="btn btn-primary" id="orbElementsCalc" type="submit" disabled="disabled">Посчитать элементы орбиты <i class="fa fa-chevron-down"></i> </button>
+                <button class="btn btn-primary" id="orbElementsCalc" type="submit" disabled="disabled">Посчитать элементы орбиты <i class="fa fa-chevron-down"></i></button>
+            </td>
+            <td>
+                @using (Html.BeginForm("SetServer", viewModel.CotrollerName, FormMethod.Post, new { @id = "_serverForm", @class = "form-inline" }))
+                {
+                    <div class="form-group">
+                        @Html.DropDownListFor((m) => m.SelectedServer, Model.AvalibleServersSelectListItems, new { @id = "aval-servers", @class = "form-control" } )
+                    </div>
+                    
+                    <button class="btn btn-default" id="_refresh" type="submit">Обновить <i class="fa fa-refresh"></i> </button>
+                }
             </td>
         </tr>
     </table>

@@ -5,27 +5,21 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
     // ReSharper disable once InconsistentNaming
     [Authorize]
-    public class ISSController : SpacecraftBaseController
+    public class CanopusController : SpacecraftBaseController
     {
         internal override sealed void InitializeViewModel()
         {
             MainSpacecraftLayoutViewModel = new MainSpacecraftLayoutViewModel
             {
-                CotrollerName = "ISS",
-                Id = 1
+                CotrollerName = "Canopus",
+                Id = 3
             };
             ViewData["MainSpacecraftLayoutViewModel"] = MainSpacecraftLayoutViewModel;
         }
 
-        public ISSController()
+        public CanopusController()
         {
             InitializeViewModel();
-        }
-
-
-        public ActionResult Test()
-        {
-            return RedirectToAction("Index", "Home");
         }
     }
 }

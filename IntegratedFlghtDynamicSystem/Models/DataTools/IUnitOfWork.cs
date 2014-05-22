@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IntegratedFlghtDynamicSystem.Models.DataTools
+﻿namespace IntegratedFlghtDynamicSystem.Models.DataTools
 {
     public interface IUnitOfWork
     {
@@ -37,6 +31,15 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         {
             get;
         }
+<<<<<<< HEAD
+=======
+        bool OracleServer { get; set; }
+
+        IRepository<NU> OracleNuData
+        {
+            get; set;
+        } 
+>>>>>>> DataCenterSupport
 
         void Save();
 

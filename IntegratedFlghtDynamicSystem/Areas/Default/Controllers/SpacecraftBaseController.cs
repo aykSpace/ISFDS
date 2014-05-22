@@ -12,12 +12,18 @@ using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
 using IntegratedFlghtDynamicSystem.Filters;
 using IntegratedFlghtDynamicSystem.Models;
+using IntegratedFlghtDynamicSystem.Models.DataTools;
 using IntegratedFlghtDynamicSystem.Models.Grid;
 using OrbitElementsCalc;
 using HttpNotFoundResult = System.Web.Mvc.HttpNotFoundResult;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
+    public enum DataServers
+    {
+        SqlServer, Mkcdc2 
+    }
+
     public abstract class SpacecraftBaseController : BaseController
     {
         public MainSpacecraftLayoutViewModel MainSpacecraftLayoutViewModel { get; set; }
@@ -37,12 +43,11 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         /// <summary>
         /// Главная страница с информацией o КА
         /// </summary>
-        /// <param name="id">Id SpacecraftInitialData</param>
         /// <returns></returns>
-        public virtual ActionResult Index(int id)
+        public virtual ActionResult Index()
         {
-            Session["SpCrId"] = id;
-            var spaceCraftInitData = UnitOfWork.SpacecraftInfoRepository.GetById(id);
+            Session["SpCrId"] = MainSpacecraftLayoutViewModel.Id;
+            var spaceCraftInitData = UnitOfWork.SpacecraftInfoRepository.GetById(MainSpacecraftLayoutViewModel.Id);
             if (spaceCraftInitData != null)
             {
                 var spCrViewModel = SpaceCraftModelMapper.Map(spaceCraftInitData, typeof(SpacecraftInitialData),
@@ -82,6 +87,8 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         /// <returns></returns>
         public JsonResult GetData(GridSettings grid)
         {
+            int spCrIntiDataId = Convert.ToInt32(Session["SpCrId"]);
+
             if (_fromIndex && Session["NuGridSettings"] != null)
             {
                 //
@@ -92,7 +99,6 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 
             if (Session["SpCrId"] != null)
             {
-                var spCrIntiDataId = (int)Session["SpCrId"];
                 _fromIndex = false; // Must be set on false here!
                 //
                 // Load the data from the database for the current grid settings.
@@ -102,6 +108,9 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                     : (DateTime)Session["StartDate"]);
                 DateTime searchEndDate = (Session["EndDate"] == null ? DateTime.MinValue : (DateTime)Session["EndDate"]);
                 int count;
+
+               // IQueryable<NU> query = NU.GetNuFromOracle(new OracleNuRepository());
+
                 IQueryable<NU> query = grid.LoadGridData(NU.SearchNuByDates(UnitOfWork, searchStartDate, searchEndDate, spCrIntiDataId),
                     out count);
                 NU[] data = query.ToArray();
@@ -145,7 +154,16 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         public ActionResult SpacecraftVectorsInitialData()
         {
             _fromIndex = true;
-            return View();
+            var viewModel = new AvaliableServersViewModel();
+            viewModel.AvalibleServers.Add("Sql server");
+            viewModel.AvalibleServers.Add("Data center (mkcdc2)");
+            if (Session["SelectedServerId"] != null)
+            {
+                var serverId = Convert.ToInt32(Session["SelectedServerId"]);
+                viewModel.SelectedServer = serverId;
+                UnitOfWork.OracleServer = serverId == (int)DataServers.Mkcdc2;
+            }
+            return  View(viewModel);
         }
 
         //
@@ -322,6 +340,89 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         //
         // GET: /Default/ISS/Engines
 
+<<<<<<< HEAD
+        /// <summary>
+        /// Управление ДУ
+        /// </summary>
+        /// <returns></returns>
+        public virtual PartialViewResult Engines()
+        {
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            var engineVm = new EngineViewModel();
+            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
+            engineVm.ID_Engine = spCr.EngineID;
+            var listOfEngines = UnitOfWork.SpacecraftEnginesRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
+            foreach (var spacecraftEngines in listOfEngines)
+            {
+                engineVm.AvalibleEnginecId.Add(spacecraftEngines.EngineId);
+            }
+            Session["EngineId"] = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).EngineID;
+
+            return PartialView(engineVm);
+        }
+
+        /// <summary>
+        /// Возвращает выбранный по идентификатору ДУ
+        /// </summary>
+        /// <param name="id">id engine</param>
+        /// <returns>Json</returns>
+        public ActionResult GetEngine(int id)
+        {
+            var engine = UnitOfWork.EngineRepository.GetById(id);
+            if (engine != null)
+            {
+                var engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
+                typeof(EngineViewModel));
+                return Json(engineVm, JsonRequestBehavior.AllowGet);
+            }
+            return HttpNotFound("Mass inertial characteristic not found");
+        }
+
+
+        /// <summary>
+        /// Задает идентификатор текущего ДУ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public RedirectToRouteResult SetCurrentEngine(int? id)
+        {
+            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
+            if (id == null)
+            {
+                return RedirectToAction("Index", new { id = idSpcr });
+            }
+            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
+            spCr.EngineID = Convert.ToInt32(id);
+            UnitOfWork.SpacecraftInfoRepository.Update(spCr);
+            UnitOfWork.Save();
+            return RedirectToAction("Index", new { id = idSpcr });
+        }
+
+        /// <summary>
+        /// Показывает форму для редактирования ДУ из EngineController
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShowEditEngine(int id)
+        {
+            ViewBag.EngineId = id;
+            return View();
+        }
+
+        /// <summary>
+        /// Показывает форму для удаления ДУ из EngineController
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ShowDeleteEngine(int id)
+        {
+            ViewBag.EngineId = id;
+            return View();
+        }
+
+
+=======
+>>>>>>> DataCenterSupport
         /// <summary>
         /// Управление ДУ
         /// </summary>
@@ -405,11 +506,16 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         /// <summary>
         /// Вычисляет элементы орбиты для заданного вектора состояния
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id nu</param>
         /// <returns></returns>
         public PartialViewResult CalculateOrbitElements(int id)
         {
             var nu = UnitOfWork.NuRepository.GetById(id);
+            if (nu == null)
+            {
+                var repo = new OracleNuRepository();
+                nu = repo.GetById(id);
+            }
             var vector = new BalVector((uint)nu.Vitok, nu.t, nu.X, nu.Y, nu.Z, nu.VX, nu.VY, nu.VZ, nu.Sbal,
                 nu.DateNU);
             BalVector.ap = 110;
@@ -501,6 +607,13 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                 TempData["grafData"] = data;
             }
             return Json(data[id].Points, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult SetServer(AvaliableServersViewModel avaliableServers)
+        {
+            Session["SelectedServerId"] = avaliableServers.SelectedServer;
+            return RedirectToAction("SpacecraftVectorsInitialData");
         }
 
 
