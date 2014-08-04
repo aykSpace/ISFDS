@@ -4,7 +4,7 @@ using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 {
     // ReSharper disable once InconsistentNaming
-    [Authorize]
+    //[Authorize]
     public class ISSController : SpacecraftBaseController
     {
         internal override sealed void InitializeViewModel()

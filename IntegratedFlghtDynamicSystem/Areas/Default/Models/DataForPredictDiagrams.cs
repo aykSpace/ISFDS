@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BalPredictCLR;
-using OrbitElementsCalc;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Default.Models
 {

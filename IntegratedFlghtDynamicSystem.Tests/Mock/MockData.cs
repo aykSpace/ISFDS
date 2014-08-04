@@ -5,6 +5,7 @@ using System.Linq;
 using IntegratedFlghtDynamicSystem.Models;
 using IntegratedFlghtDynamicSystem.Models.DataTools;
 using Moq;
+using NUnit.Framework;
 
 namespace IntegratedFlghtDynamicSystem.Tests.Mock
 {
@@ -65,7 +66,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
                 MassInerCharacteristicId = 2,
                 EngineID = 0,
                 Comments = "mock ISS",
-                NUs = null
+                NU = null
             };
             SpacecraftInitialDatas.Add(spCraftInData);
 
@@ -156,6 +157,41 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
             Setup(p => p.MicRepository.GetById(It.IsAny<int>()))
                 .Returns((int id) => MicData.FirstOrDefault(p => p.ID_MIC == id));
             Setup(p => p.MicRepository.Insert(It.IsAny<MassInertialCharacteristic>())).Verifiable();
+        }
+
+        public List<SpacecraftInitialData> Spacecraft { get; set; }
+        public GenericRepository<SpacecraftInitialData> SpacecraftRepository { get; set; }
+
+        public void GenerateSpacecraft()
+        {
+            Spacecraft = new List<SpacecraftInitialData>(2);
+            SpacecraftRepository = new GenericRepository<SpacecraftInitialData>();
+            var spcr1 = new SpacecraftInitialData
+            {
+                SpacecraftName = "ISS",
+                SpacecraftInitDataId = 1,
+                MassInerCharacteristicId = 2,
+                EngineID = 1,
+                SpacecraftNumber = 1
+            };
+            var spcr2 = new SpacecraftInitialData
+            {
+                SpacecraftName = "Soyuz",
+                SpacecraftInitDataId = 2,
+                MassInerCharacteristicId = 1,
+                EngineID = 2,
+                SpacecraftNumber = 711
+            };
+            Spacecraft.Add(spcr1);
+            Spacecraft.Add(spcr2);
+
+            Setup(p => p.SpacecraftInfoRepository).Returns(SpacecraftRepository);
+            Setup(p => p.SpacecraftInfoRepository.Get()).Returns(Spacecraft.AsEnumerable);
+            Setup(p => p.SpacecraftInfoRepository.GetById(It.IsAny<int>()))
+                .Returns((int id) => Spacecraft.FirstOrDefault(m => m.SpacecraftInitDataId == id));
+            Setup(p => p.SpacecraftInfoRepository.Delete(It.IsAny<int>())).Callback(() => Spacecraft.RemoveAll(p => p.SpacecraftNumber == 1));
+            Setup(p => p.SpacecraftInfoRepository.Delete(It.IsAny<SpacecraftInitialData>())).Callback(() => Spacecraft.RemoveAll(p => p.SpacecraftNumber == 1));
+
         }
 
 

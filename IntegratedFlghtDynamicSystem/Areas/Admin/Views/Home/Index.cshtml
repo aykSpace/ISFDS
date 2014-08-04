@@ -37,19 +37,34 @@
                                         @Html.DisplayFor(m => spcraft.Comments)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Index", new { id = spcraft.SpacecraftInitDataId }) |
-                                        @Html.ActionLink("Delete", "Index", new { id = spcraft.SpacecraftInitDataId })
+                                        <!-- @Html.ActionLink("Edit", "ShowEditForm", new { id = spcraft.SpacecraftInitDataId}, new {@class = "editSpCr"})  -->
+                                        <a href="@Url.Action("ShowEditForm", new {id = spcraft.SpacecraftInitDataId})" class="editSpCr"
+                                             data-ref="@Url.HttpRouteUrl("DefaultApi", new { controller = "Spacecraft", id = spcraft.SpacecraftInitDataId })">Edit </a>|
+                                        <a href="@Url.HttpRouteUrl("DefaultApi", new { controller = "Spacecraft", id = spcraft.SpacecraftInitDataId })" class="deleteSpCr">Delete</a>
                                     </td>
                                 </tr>
                             }
                         </table>
                         <div class="text-right form-inline">
-                            <a href="@Url.Action("AddSpacecraft")" class="btn btn-primary" id="check"><i class="fa fa-plus"></i> Добавить КА</a>
+                            <a href="@Url.Action("AddSpacecraft")" class="btn btn-primary" id="check"><i class="fa fa-plus"></i>Добавить КА</a>
 
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="alert alert-dismissable alert-danger" hidden="hidden" id="errorResult">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Ошибка!</strong>
+            </div>
+        </div>
+        <div id="dialog" title="Confirmation Required">
+            Are you sure?
         </div>
     </div>
+    <div id="PopupWrapper"></div>
 </section>
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/editDelSpCr")
+}

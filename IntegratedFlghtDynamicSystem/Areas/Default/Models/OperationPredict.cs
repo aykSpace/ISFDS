@@ -55,11 +55,11 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Models
                 }
                 else if (_predictTaskViewModel.DateTimePredict > DateTime.MinValue)
                 {
-                    resultVectors.Add(vector.Prognoz(_predictTaskViewModel.DateTimePredict));
+                   // resultVectors.Add(vector.Prognoz(_predictTaskViewModel.DateTimePredict));
                 }
                 else if (_predictTaskViewModel.U >= 0)
                 {
-                    resultVectors.Add(vector.Prognoz(_predictTaskViewModel.U));
+                   // resultVectors.Add(vector.Prognoz(_predictTaskViewModel.U));
                 }
                 else
                 {

@@ -340,89 +340,6 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
         //
         // GET: /Default/ISS/Engines
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Управление ДУ
-        /// </summary>
-        /// <returns></returns>
-        public virtual PartialViewResult Engines()
-        {
-            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
-            var engineVm = new EngineViewModel();
-            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
-            engineVm.ID_Engine = spCr.EngineID;
-            var listOfEngines = UnitOfWork.SpacecraftEnginesRepository.Get().Where(x => x.SpacecraftInitDataId == idSpcr);
-            foreach (var spacecraftEngines in listOfEngines)
-            {
-                engineVm.AvalibleEnginecId.Add(spacecraftEngines.EngineId);
-            }
-            Session["EngineId"] = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr).EngineID;
-
-            return PartialView(engineVm);
-        }
-
-        /// <summary>
-        /// Возвращает выбранный по идентификатору ДУ
-        /// </summary>
-        /// <param name="id">id engine</param>
-        /// <returns>Json</returns>
-        public ActionResult GetEngine(int id)
-        {
-            var engine = UnitOfWork.EngineRepository.GetById(id);
-            if (engine != null)
-            {
-                var engineVm = (EngineViewModel)EngineMapper.Map(engine, typeof(Engine),
-                typeof(EngineViewModel));
-                return Json(engineVm, JsonRequestBehavior.AllowGet);
-            }
-            return HttpNotFound("Mass inertial characteristic not found");
-        }
-
-
-        /// <summary>
-        /// Задает идентификатор текущего ДУ
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public RedirectToRouteResult SetCurrentEngine(int? id)
-        {
-            int idSpcr = Convert.ToInt32(Session["SpCrId"]);
-            if (id == null)
-            {
-                return RedirectToAction("Index", new { id = idSpcr });
-            }
-            var spCr = UnitOfWork.SpacecraftInfoRepository.GetById(idSpcr);
-            spCr.EngineID = Convert.ToInt32(id);
-            UnitOfWork.SpacecraftInfoRepository.Update(spCr);
-            UnitOfWork.Save();
-            return RedirectToAction("Index", new { id = idSpcr });
-        }
-
-        /// <summary>
-        /// Показывает форму для редактирования ДУ из EngineController
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult ShowEditEngine(int id)
-        {
-            ViewBag.EngineId = id;
-            return View();
-        }
-
-        /// <summary>
-        /// Показывает форму для удаления ДУ из EngineController
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult ShowDeleteEngine(int id)
-        {
-            ViewBag.EngineId = id;
-            return View();
-        }
-
-
-=======
->>>>>>> DataCenterSupport
         /// <summary>
         /// Управление ДУ
         /// </summary>
@@ -522,7 +439,6 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             BalVector.f = 16;
             var orbElements = new OrbitElementsCLI(vector);
             orbElements.GetElements();
-
             return PartialView(orbElements);
         }
 
@@ -548,7 +464,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
 
         [HttpPost]
         [AcceptAjax]
-        [AjaxAutorize]
+        //[AjaxAutorize]
         public async Task<PartialViewResult> Predict(PredictTaskViewModel predictTaskViewModel)
         {
             var factoryPredict = new FactoryPredict(predictTaskViewModel, UnitOfWork);

@@ -135,10 +135,12 @@
     <Compile Include="Controllers\ConfigTest.cs" />
     <Compile Include="Controllers\ISSControllerTest.cs" />
     <Compile Include="Controllers\NuApiTest.cs" />
+    <Compile Include="Controllers\SpacecraftApiTest.cs" />
     <Compile Include="Fake\FakeAjaxExtention.cs" />
     <Compile Include="Fake\FakeControllerContext.cs" />
     <Compile Include="Fake\FakeHttpContext.cs" />
     <Compile Include="Fake\FakeHttpRequest.cs" />
+    <Compile Include="Fake\FakeHttpRequestMessage.cs" />
     <Compile Include="Fake\FakeHttpSessionState.cs" />
     <Compile Include="Fake\FakeIdentity.cs" />
     <Compile Include="Fake\FakePrincipal.cs" />

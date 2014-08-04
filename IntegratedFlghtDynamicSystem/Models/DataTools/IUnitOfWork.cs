@@ -27,19 +27,16 @@
             get;
         }
 
-        GenericRepository<SpacecraftsEngine> SpacecraftEnginesRepository
+        GenericRepository<SpacecraftsEngines> SpacecraftEnginesRepository
         {
             get;
         }
-<<<<<<< HEAD
-=======
         bool OracleServer { get; set; }
 
         IRepository<NU> OracleNuData
         {
             get; set;
         } 
->>>>>>> DataCenterSupport
 
         void Save();
 

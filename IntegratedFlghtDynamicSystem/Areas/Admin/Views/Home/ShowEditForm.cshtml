@@ -1,0 +1,95 @@
+﻿@model IntegratedFlghtDynamicSystem.Areas.Default.ViewModels.SpacecraftViewModel
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Редактирование</h3>
+            </div>
+            <div class="modal-body">
+                @{Html.EnableClientValidation();}
+                @{Html.EnableUnobtrusiveJavaScript();}
+                @using (Html.BeginForm("ShowEditForm", "Home", FormMethod.Post, new { @class = "form-horizontal", id = "editSpCrForm", ViewBag.ReturnUrl }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.SpacecraftInitDataId)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SpacecraftName)
+                        @Html.TextBoxFor(m => m.SpacecraftName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SpacecraftName, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SpacecraftNumber)
+                        @Html.TextBoxFor(m => m.SpacecraftNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SpacecraftNumber, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InternationalNumber)
+                        @Html.TextBoxFor(m => m.InternationalNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InternationalNumber, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CCSANumber)
+                        @Html.TextBoxFor(m => m.CCSANumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CCSANumber, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NORADNumber)
+                        @Html.TextBoxFor(m => m.NORADNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NORADNumber, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SpacecraftType)
+                        @Html.TextBoxFor(m => m.SpacecraftType, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SpacecraftType, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.OrbitType)
+                        @Html.TextBoxFor(m => m.OrbitType, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.OrbitType, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Launcher)
+                        @Html.TextBoxFor(m => m.Launcher, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Launcher, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ReboostBlockType)
+                        @Html.TextBoxFor(m => m.ReboostBlockType, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ReboostBlockType, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateOfLaunch)
+                        @Html.TextBoxFor(m => m.DateOfLaunch, new { @class = "form-control", @placeholder = "01/08/2014 23:00:01" })
+                        @Html.ValidationMessageFor(m => m.DateOfLaunch, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group hidden">
+                        @Html.LabelFor(m => m.MassInerCharacteristicId)
+                        @Html.TextBoxFor(m => m.MassInerCharacteristicId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MassInerCharacteristicId, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group hidden">
+                        @Html.LabelFor(m => m.EngineID)
+                        @Html.TextBoxFor(m => m.EngineID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.EngineID, null, new { @class = "error" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Comments)
+                        @Html.TextBoxFor(m => m.Comments, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Comments, null, new { @class = "error" })
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>
+                <button class="btn btn-primary" id="editButton">Сохранить</button>
+            </div>
+            <div class="alert alert-dismissable alert-danger" hidden="hidden" id="errorEditResult">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Ошибка!</strong>
+            </div>
+        </div>
+    </div>
+</div>

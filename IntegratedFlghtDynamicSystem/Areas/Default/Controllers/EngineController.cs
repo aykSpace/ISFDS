@@ -77,7 +77,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
                 if (Session["SpCrId"] != null)
                 {
                     int idSpcr = Convert.ToInt32(Session["SpCrId"]);
-                    UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngine
+                    UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngines
                     {
                         SpacecraftInitDataId = idSpcr,
                         EngineId = engine.ID_Engine

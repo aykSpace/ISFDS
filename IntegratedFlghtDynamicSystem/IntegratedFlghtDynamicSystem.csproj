@@ -42,9 +42,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="BalPredictCLR, Version=1.0.5151.19104, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="BalPredictCLR, Version=1.0.5329.18455, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CSharpBalPredict\BalPredictCLR\Debug\BalPredictCLR.dll</HintPath>
+      <HintPath>E:\Projects\CSharpBalPredict\BalPredictCLR\Release\BalPredictCLR.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
@@ -63,9 +63,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SpaceDebris\SpaceDebris\bin\Debug\Oracle.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="OrbitElementsCalc, Version=1.0.5130.17220, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dll_vitok\OrbitElementsCalc\Release\OrbitElementsCalc.dll</HintPath>
+    <Reference Include="OrbitElementsCalc">
+      <HintPath>..\..\ISFDS\IntegratedFlghtDynamicSystem\bin\OrbitElementsCalc.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -280,7 +279,7 @@
     <Compile Include="Models\DataTools\IRepository.cs" />
     <Compile Include="Models\DataTools\IUnitOfWork.cs" />
     <Compile Include="Models\Engine.cs">
-      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grid\GridModelBinder.cs" />
     <Compile Include="Models\Grid\GridSettings.cs" />
@@ -300,21 +299,39 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntegratedDataBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\IntegratedDataBaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegratedDataBaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntegratedDataBaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntegratedDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntegratedDataBaseModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\MassInertialCharacteristic.cs">
-      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NU.cs">
-      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Nu1.cs" />
     <Compile Include="Models\SpacecraftInitialData.cs">
-      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SpacecraftsEngine.cs">
       <DependentUpon>IntegratedDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SpacecraftsEngines.cs">
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SpaceсraftCommonData.cs">
-      <DependentUpon>IntegratedDataBase.tt</DependentUpon>
+      <DependentUpon>IntegratedDataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ninject\NinjectResolver.cs" />
     <Compile Include="Ninject\NinjectScope.cs" />
@@ -479,16 +496,35 @@
     <Content Include="Areas\Default\Views\Engine\EditEngine.cshtml" />
     <Content Include="Areas\Default\Views\Engine\DeleteEngine.cshtml" />
     <Content Include="Areas\Default\Views\SpacecraftBase\ShowDeleteEngine.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ShowEditForm.cshtml" />
+    <EntityDeploy Include="Models\IntegratedDataBaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IntegratedDataBaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\IntegratedDataBaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegratedDataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>IntegratedDataBaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IntegratedDataBaseModel.edmx.diagram">
+      <DependentUpon>IntegratedDataBaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\IntegratedDataBaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntegratedDataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>IntegratedDataBaseModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\isfdsc.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="mapbigic.ico" />
-    <Content Include="OrbitElementsCalc.dll" />
     <Content Include="Scripts\addData.js" />
     <Content Include="Scripts\ajaxPaging.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chartsScript.js" />
     <Content Include="Scripts\dx.chartjs.js" />
+    <Content Include="Scripts\editDelSpCr.js" />
     <Content Include="Scripts\globalize.js" />
     <Content Include="Scripts\grid.locale-en.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -573,6 +609,24 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -585,7 +639,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>57946</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2862/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -16,9 +16,9 @@ namespace IntegratedFlghtDynamicSystem.Models
     {
         public SpacecraftInitialData()
         {
-            this.NUs = new HashSet<NU>();
-            this.SpacecraftsEngines = new HashSet<SpacecraftsEngine>();
+            this.NU = new HashSet<NU>();
             this.SpaceсraftCommonData = new HashSet<SpaceсraftCommonData>();
+            this.SpacecraftsEngines = new HashSet<SpacecraftsEngines>();
         }
     
         public int SpacecraftInitDataId { get; set; }
@@ -36,10 +36,10 @@ namespace IntegratedFlghtDynamicSystem.Models
         public int EngineID { get; set; }
         public string Comments { get; set; }
     
-        public virtual ICollection<NU> NUs { get; set; }
+        public virtual ICollection<NU> NU { get; set; }
         public virtual Engine Engine { get; set; }
         public virtual MassInertialCharacteristic MassInertialCharacteristic { get; set; }
-        public virtual ICollection<SpacecraftsEngine> SpacecraftsEngines { get; set; }
         public virtual ICollection<SpaceсraftCommonData> SpaceсraftCommonData { get; set; }
+        public virtual ICollection<SpacecraftsEngines> SpacecraftsEngines { get; set; }
     }
 }

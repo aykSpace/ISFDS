@@ -9,10 +9,10 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        internal ISFDSEntities Context;
+        internal ISFDS2Entities Context;
         internal DbSet<TEntity> DbSet;
 
-        public GenericRepository(ISFDSEntities context)
+        public GenericRepository(ISFDS2Entities context)
         {
             Context = context;
             DbSet = context.Set<TEntity>();

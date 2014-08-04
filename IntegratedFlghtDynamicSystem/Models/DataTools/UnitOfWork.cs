@@ -1,6 +1,7 @@
 ﻿using System;
 using IntegratedFlghtDynamicSystem.Areas.Default.Controllers;
 
+
 namespace IntegratedFlghtDynamicSystem.Models.DataTools
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
@@ -8,23 +9,19 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
         
         public UnitOfWork()
         {
-            _context = new ISFDSEntities();
+            _context = new ISFDS2Entities();
         }
 
-        private readonly ISFDSEntities _context;
+        private readonly ISFDS2Entities _context;
         private GenericRepository<SpacecraftInitialData> _spacecraftInfoRepository;
         private GenericRepository<NU> _nuRepository;
         private GenericRepository<MassInertialCharacteristic> _micRepository;
         private GenericRepository<Engine> _engineRepository;
         private GenericRepository<SpaceсraftCommonData> _spcraftCommonDataRepository;
-<<<<<<< HEAD
-        private GenericRepository<SpacecraftsEngine> _spcraftEnginesRepository; 
-=======
-        private GenericRepository<SpacecraftsEngine> _spcraftEnginesRepository;
+        private GenericRepository<SpacecraftsEngines> _spcraftEnginesRepository;
         private IRepository<NU> _oracleRepository; 
         private static bool _oracleServer;
         public bool OracleServer { get { return _oracleServer; } set { _oracleServer = value; } } //monostate pattern
->>>>>>> DataCenterSupport
 
         public GenericRepository<SpacecraftInitialData> SpacecraftInfoRepository
         {
@@ -36,12 +33,12 @@ namespace IntegratedFlghtDynamicSystem.Models.DataTools
             get { return _spcraftCommonDataRepository ?? (_spcraftCommonDataRepository = new GenericRepository<SpaceсraftCommonData>(_context)); }
         }
 
-        public GenericRepository<SpacecraftsEngine> SpacecraftEnginesRepository
+        public GenericRepository<SpacecraftsEngines> SpacecraftEnginesRepository
         {
             get
             {
                 return _spcraftEnginesRepository ??
-                       (_spcraftEnginesRepository = new GenericRepository<SpacecraftsEngine>(_context));
+                       (_spcraftEnginesRepository = new GenericRepository<SpacecraftsEngines>(_context));
             }
         } 
 

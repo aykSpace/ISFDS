@@ -67,7 +67,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Default.Controllers
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
-            ModelState.AddModelError("", "Имя пользователя или пароль указаны неверно.");
+            ModelState.AddModelError("", @"Имя пользователя или пароль указаны неверно.");
             return View(model);
         }
 

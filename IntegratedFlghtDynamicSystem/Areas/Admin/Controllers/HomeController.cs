@@ -5,7 +5,6 @@ using AutoMapper;
 using IntegratedFlghtDynamicSystem.Areas.Default.ViewModels;
 using IntegratedFlghtDynamicSystem.Controllers;
 using IntegratedFlghtDynamicSystem.Models;
-using PagedList;
 
 namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
 {
@@ -49,7 +48,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
                 MIC_Id = spcraft.MassInerCharacteristicId,
                 SpacecraftInitDataId = spcraft.SpacecraftInitDataId
             });
-            UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngine
+            UnitOfWork.SpacecraftEnginesRepository.Insert(new SpacecraftsEngines
             {
                 SpacecraftInitDataId = spcraft.SpacecraftInitDataId,
                 EngineId = spcraft.EngineID
@@ -75,6 +74,14 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
         public ActionResult ShowAddEngineForm()
         {
             return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult ShowEditForm(int id)
+        {
+            var spcrVm = (SpacecraftViewModel)Mapper.Map(UnitOfWork.SpacecraftInfoRepository.GetById(id), typeof(SpacecraftInitialData),
+                typeof(SpacecraftViewModel));
+            return PartialView(spcrVm);
         }
 
     }

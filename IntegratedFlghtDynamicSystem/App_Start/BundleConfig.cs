@@ -52,6 +52,7 @@ namespace IntegratedFlghtDynamicSystem
 
             bundles.Add(new ScriptBundle("~/Scripts/addData").Include("~/Scripts/addData.js"));
             bundles.Add(new ScriptBundle("~/Scripts/ajaxPaging").Include("~/Scripts/ajaxPaging.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/editDelSpCr").Include("~/Scripts/editDelSpCr.js"));
 
         }
     }

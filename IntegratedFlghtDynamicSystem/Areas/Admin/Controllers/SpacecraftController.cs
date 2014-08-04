@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,6 +22,8 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
 
         [Inject]
         public IMapper Mapper { get; set; }
+
+        /*public  IMapper Mapper = new SpacecraftMapper();*/
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -49,31 +52,35 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
         }
 
         //// PUT api/Spacecraft/5
-        //public HttpResponseMessage PutSpacecraftInitialData(int id, SpacecraftInitialData spacecraftinitialdata)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
+        public HttpResponseMessage PutSpacecraftInitialData(int id, SpacecraftViewModel spacecraftViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                //var errors = ModelState.Values.SelectMany(v => v.Errors).AsEnumerable();
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
 
-        //    if (id != spacecraftinitialdata.SpacecraftInitDataId)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
-        //    }
+            if (id != spacecraftViewModel.SpacecraftInitDataId)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
 
-        //    db.Entry(spacecraftinitialdata).State = EntityState.Modified;
+            var spcraft = (SpacecraftInitialData)Mapper.Map(spacecraftViewModel, typeof(SpacecraftViewModel),
+                    typeof(SpacecraftInitialData));
+            UnitOfWork.SpacecraftInfoRepository.Update(spcraft);
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException ex)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-        //    }
+            try
+            {
+               UnitOfWork.Save();
 
-        //    return Request.CreateResponse(HttpStatusCode.OK);
-        //}
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
 
         //// POST api/Spacecraft
         [HttpPost]
@@ -86,7 +93,7 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
                 UnitOfWork.SpacecraftInfoRepository.Insert(spcraft);
                 try
                 {
-                    //UnitOfWork.Save();
+                    UnitOfWork.Save();
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, spcraft);
                     response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = spcraft.SpacecraftInitDataId }));
                     return response;
@@ -102,27 +109,27 @@ namespace IntegratedFlghtDynamicSystem.Areas.Admin.Controllers
         }
 
         //// DELETE api/Spacecraft/5
-        //public HttpResponseMessage DeleteSpacecraftInitialData(int id)
-        //{
-        //    SpacecraftInitialData spacecraftinitialdata = db.SpacecraftInitialDatas.Find(id);
-        //    if (spacecraftinitialdata == null)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.NotFound);
-        //    }
+        public HttpResponseMessage DeleteSpacecraftInitialData(int id)
+        {
+            SpacecraftInitialData spacecraftinitialdata = UnitOfWork.SpacecraftInfoRepository.GetById(id);
+            if (spacecraftinitialdata == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
 
-        //    db.SpacecraftInitialDatas.Remove(spacecraftinitialdata);
+            UnitOfWork.SpacecraftInfoRepository.Delete(spacecraftinitialdata);
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException ex)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-        //    }
+            try
+            {
+                UnitOfWork.Save();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
 
-        //    return Request.CreateResponse(HttpStatusCode.OK, spacecraftinitialdata);
-        //}
+            return Request.CreateResponse(HttpStatusCode.OK, spacecraftinitialdata);
+        }
 
         //protected override void Dispose(bool disposing)
         //{

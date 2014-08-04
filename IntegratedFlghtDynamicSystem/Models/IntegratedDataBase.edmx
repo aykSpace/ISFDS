@@ -154,7 +154,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SpaceCraftCommonData_SpacecraftInitialData">
-          <End Role="SpacecraftInitialData" Type="Хранилище ISFDSModel.SpacecraftInitialData" Multiplicity="1" />
+          <End Role="SpacecraftInitialData" Type="Хранилище ISFDSModel.SpacecraftInitialData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SpaceсraftCommonData" Type="Хранилище ISFDSModel.SpaceсraftCommonData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SpacecraftInitialData">

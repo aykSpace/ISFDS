@@ -44,12 +44,12 @@ namespace IntegratedFlghtDynamicSystem.Controllers
         }
 
         //// GET api/Nu/GetSpacecraftNu/3
-        public IEnumerable<NuViewModel> GetSpacecraftNu(int id)
+      /*  public IEnumerable<NuViewModel> GetSpacecraftNu(int id)
         {
             var nus = UnitOfWork.NuRepository.Get().Where(p => p.SpacecraftInitialData_ID == id);
             var nuViewModels = nus.Select(nu => (NuViewModel)_nuMapper.Map(nu, typeof(NU), typeof(NuViewModel))).ToList();
             return nuViewModels;
-        }
+        }*/
 
         //// PUT api/Nu/5
         public HttpResponseMessage PutNu(int id, NuViewModel nuVm)

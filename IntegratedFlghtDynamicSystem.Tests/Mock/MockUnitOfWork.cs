@@ -12,6 +12,7 @@ namespace IntegratedFlghtDynamicSystem.Tests.Mock
             GenerateSpCrItitialData();
             GenerateSpcrComonData();
             GenerateMicData();
+            GenerateSpacecraft();
             Setup(p => p.Save()).Verifiable("fail save");
             Setup(p => p.OracleServer).Returns(false);
         }

@@ -1,0 +1,4 @@
+﻿SET IDENTITY_INSERT [dbo].[NU] ON
+INSERT INTO [dbo].[NU] ([ID_NU], [N_NU], [Modification], [SpacecraftInitialData_ID], [X], [Y], [Z], [VX], [VY], [VZ], [t], [Vitok], [Sbal], [DateNU], [Comment])
+ VALUES (1, 2, 1, 1, 424.78293230, -6774.344163, 299.88650640, 4.23755698, 0.54054299, 6.00138935, 24840, 2898, 0.0459, N'2014-01-08', 'ISS NU')
+SET IDENTITY_INSERT [dbo].[NU] OFF
